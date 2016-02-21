@@ -38,7 +38,7 @@ Create the composer.json file as follows:
 ```json
 {
     "require": {
-        "phalcongelist/breadcrumbs": "dev-master"
+        "phalcongelist/breadcrumbs": "^1.0"
     }
 }
 ```
