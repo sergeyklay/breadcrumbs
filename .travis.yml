@@ -1,0 +1,37 @@
+language: php
+
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+
+sudo: required
+dist: trusty
+
+before_install:
+  - sudo apt-add-repository -y ppa:phalcon/stable
+  - sudo apt-get update -qq
+  - sudo apt-get install -y -q php5-phalcon
+  - sudo php5enmod phalcon
+  - php --ri phalcon
+  - phpenv rehash
+  - composer self-update
+  - travis_retry composer install --prefer-dist --no-interaction
+  - ulimit -c unlimited -S || true
+  - echo '/tmp/core_%e.%p' | sudo tee /proc/sys/kernel/core_pattern &> /dev/null
+  - stty cols 160
+
+script:
+  - vendor/bin/phpcs --standard=PSR2 --colors --extensions=php --encoding=utf-8 src/
+
+notifications:
+  email:
+    recipients:
+      - serghei@phalconphp.com
+    on_success: change
+    on_failure: always
+
+addons:
+  apt:
+    packages:
+      - gdb
