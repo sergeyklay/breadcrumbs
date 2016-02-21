@@ -114,7 +114,7 @@ $this->breadcrumbs->update('/admin/user/remove', ['label' => '<strong class="red
 **Sets rendering template:**
 
 ```php
-$breadcrumbs->setTemplate(
+$this->breadcrumbs->setTemplate(
     [
         'linked'     => '<li><a href="{{link}}">{{icon}}{{label}}</a></li>',
         'not-linked' => '<li class="active">{{icon}}{{label}}</li>',
