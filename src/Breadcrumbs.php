@@ -389,6 +389,10 @@ class Breadcrumbs extends Component
         }
 
         try {
+            if (empty($this->elements)) {
+                throw new \UnderflowException('Cannot remove crumb from an empty list.');
+            }
+
             if (!is_string($link) && !is_null($link)) {
                 $type = gettype($link);
                 throw new \InvalidArgumentException(
@@ -434,7 +438,7 @@ class Breadcrumbs extends Component
         $id = $url;
         try {
             if (empty($this->elements)) {
-                return $this;
+                throw new \UnderflowException('Cannot update on an empty breadcrumbs list.');
             }
 
             if (!is_string($id) && !is_null($id)) {
