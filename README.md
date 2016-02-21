@@ -76,17 +76,15 @@ $this->breadcrumbs->add('User', null, ['linked' => false]);
 
 **Output crumbs:**
 
+Php Engine
 ```php
 <ol class="breadcrumb">
-    <?php
-        // Php Engine
-        $this->breadcrumbs->output();
-    ?>
+    <?php $this->breadcrumbs->output(); ?>
 </ol>
 ```
 
+Volt Engine
 ```volt
-// Volt Engine
 <ol class="breadcrumb">
   {{ breadcrumbs.output() }}
 </ol>
@@ -110,7 +108,6 @@ $this->breadcrumbs->remove(null);
 **Add multi-language support:**
 
 ```php
-
 use Phalcon\Translate\Adapter\NativeArray as Translator;
 use Phalcon\Breadcrumbs;
 
@@ -123,7 +120,35 @@ $messages = [
 
 // Initialize the Translate adapter.
 $di->setShared('translate', function () {
-    return new new Translator(['content' => $messages]);
+    return new Translator(['content' => $messages]);
+});
+
+// Initialize the Breadcrumbs component.
+$di->setShared('breadcrumbs', function () {
+    return new Breadcrumbs;
+});
+```
+
+**Custom logging when errors happen:**
+
+```php
+use Phalcon\Logger\Formatter\Line as FormatterLine;
+use Phalcon\Logger\Adapter\File as FileLogger;
+use Phalcon\Breadcrumbs;
+
+// Initialize the Logger.
+$di->setShared('logger', function ($filename = null, $format = null) use ($config) {
+    $format   = $format ?: $config->get('logger')->format;
+    $filename = trim($filename ?: $config->get('logger')->filename, '\\/');
+    $path     = rtrim($config->get('logger')->path, '\\/') . DIRECTORY_SEPARATOR;
+
+    $formatter = new FormatterLine($format, $config->get('logger')->date);
+    $logger = new FileLogger($path . $filename);
+
+    $logger->setFormatter($formatter);
+    $logger->setLogLevel($config->get('logger')->logLevel);
+
+    return $logger;
 });
 
 // Initialize the Breadcrumbs component.
