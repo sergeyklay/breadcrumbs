@@ -135,7 +135,7 @@ $messages = [
 ];
 
 // Initialize the Translate adapter.
-$di->setShared('translate', function () {
+$di->setShared('translate', function () use ($messages) {
     return new Translator(['content' => $messages]);
 });
 
