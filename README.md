@@ -65,13 +65,17 @@ $di->setShared('breadcrumbs', function () {
 Adding a crumb with a link:
 
 ```php
-$this->breadcrumbs->add($router->getRouteByName('home')->compilePattern(), 'Home');
+$this->breadcrumbs->add(
+    'Home',
+    $this->router->getRouteByName('home')->getCompiledPattern()
+);
+
 ```
 
 Adding a crumb without a link (normally the last one):
 
 ```php
-$this->breadcrumbs->add('', 'User', false);
+$this->breadcrumbs->add('User', null, ['linked' => false]);
 ```
 
 Output crumbs:
