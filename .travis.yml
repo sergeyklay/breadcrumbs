@@ -17,6 +17,7 @@ before_install:
   - phpenv config-add tests/_ci/phalcon.ini &> /dev/null
   - php --ri phalcon
   - travis_retry composer self-update -q
+  - if [ -n "$GH_TOKEN" ]; then composer config github-oauth.github.com ${GH_TOKEN}; fi;
   - travis_retry composer install --prefer-dist --no-interaction
   - ulimit -c unlimited -S || true
   - stty cols 160
