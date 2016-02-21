@@ -20,7 +20,6 @@
 namespace Phalcon;
 
 use Phalcon\Mvc\User\Component;
-use Phalcon\Events\ManagerInterface;
 
 /**
  * \Phalcon\Breadcrumbs
@@ -282,7 +281,7 @@ class Breadcrumbs extends Component
      * {{ breadcrumbs.output() }};
      * </code>
      *
-     * @return string|void
+     * @return void|string
      */
     public function output()
     {

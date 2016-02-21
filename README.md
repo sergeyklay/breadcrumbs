@@ -167,7 +167,6 @@ $di->setShared('breadcrumbs', function () {
 
 ```php
 use Phalcon\Breadcrumbs;
-use My\Awesome\Listener;
 use Phalcon\Events\Manager as EventsManager;
 
 // Initialize the Events Manager.
@@ -178,7 +177,16 @@ $di->setShared('eventsManager', function () {
 // Initialize the Breadcrumbs component.
 $di->setShared('breadcrumbs', function () use ($di) {
     $manager = $di->getShared('eventsManager');
-    $manager->attach('breadcrumbs', new Listener);
+    $manager->attach('breadcrumbs', function ($event, $connection) {
+        // We stop the event if it is cancelable
+        if ($event->isCancelable()) {
+            // Stop the event, so other listeners will not be notified about this
+            $event->stop();
+        }
+
+        // Receiving the data from the event context
+        print_r($event->getData());
+    });
 
     $breadcrumbs = new Breadcrumbs;
     $breadcrumbs->setEventsManager($manager);
