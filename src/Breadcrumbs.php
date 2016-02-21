@@ -154,6 +154,14 @@ class Breadcrumbs extends Component
     /**
      * Sets crumb separator.
      *
+     * <code>
+     * // Set crumb separator
+     * $breadcrumbs->setSeparator(' &raquo; ');
+     *
+     * // Remove crumb separator
+     * $breadcrumbs->setSeparator('');
+     * </code>
+     *
      * @param string $separator Separator
      * @return $this
      */
@@ -178,6 +186,14 @@ class Breadcrumbs extends Component
     /**
      * Set whether the output must be implicitly flushed to the output or returned as string.
      *
+     * <code>
+     * // Enable implicit flush
+     * $breadcrumbs->setImplicitFlush(true);
+     *
+     * // Disable implicit flush
+     * $breadcrumbs->setImplicitFlush(true);
+     * </code>
+     *
      * @param bool $implicitFlush Implicit flush mode
      * @return $this
      */
@@ -191,9 +207,17 @@ class Breadcrumbs extends Component
     /**
      * Adds a new crumb.
      *
+     * <code>
+     * // Adding a crumb with a link
+     * $breadcrumbs->add('/', 'Home');
+     *
+     * // Adding a crumb without a link (normally the last one)
+     * $breadcrumbs->add('', 'User', false);
+     * </code>
+     *
      * @param string $link The link that will be used
      * @param string $label Text displayed in the breadcrumb trail
-     * @param bool $linked If false no link will be returned when rendering
+     * @param bool $linked If false no link will be returned when rendering [Optional]
      * @return $this
      */
     public function add($link, $label, $linked = true)
@@ -235,7 +259,7 @@ class Breadcrumbs extends Component
      * $breadcrumbs->output();
      *
      * // Volt Engine
-     * breadcrumbs.output();
+     * {{ breadcrumbs.output() }};
      * </code>
      *
      * @return string|void

@@ -68,7 +68,7 @@ Adding a crumb with a link:
 $this->breadcrumbs->add('/', 'Home');
 ```
 
-Adding a crumb without a link (Normally the last one):
+Adding a crumb without a link (normally the last one):
 
 ```php
 $this->breadcrumbs->add('', 'User', false);
@@ -84,6 +84,12 @@ $breadcrumbs->output();
 ```volt
 // Volt Engine
 breadcrumbs.output();
+```
+
+Change crumb separator:
+
+```php
+$this->breadcrumbs->setSeparator(' &raquo; ');
 ```
 
 ## Copyright
