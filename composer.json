@@ -1,5 +1,5 @@
 {
-  "name":        "phalcon/breadcrumbs",
+  "name":        "phalcongelist/breadcrumbs",
   "description": "Phalcon Official Forum",
   "keywords":    ["phalcon", "breadcrumbs", "crumbs"],
   "type":        "library",
@@ -19,7 +19,8 @@
   "support": {
     "source": "https://github.com/phalcongelist/breadcrumbs",
     "issues": "https://github.com/phalcongelist/breadcrumbs/issues",
-    "wiki":   "https://github.com/phalcongelist/breadcrumbs/wiki"
+    "wiki":   "https://github.com/phalcongelist/breadcrumbs/wiki",
+    "forum":  "https://forum.phalconphp.com/"
   },
   "require": {
     "php": ">= 5.4",
@@ -27,5 +28,10 @@
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Phalcon\\": "src/"
+    }
   }
 }
