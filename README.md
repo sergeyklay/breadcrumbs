@@ -71,7 +71,7 @@ $this->breadcrumbs->add('/', 'Home');
 Adding a crumb without a link (Normally the last one):
 
 ```php
-$this->breadcrumbs->add(null, 'User', false);
+$this->breadcrumbs->add('', 'User', false);
 ```
 
 Render crumbs:
