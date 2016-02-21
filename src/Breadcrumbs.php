@@ -20,6 +20,9 @@
 namespace Phalcon;
 
 use Phalcon\Mvc\User\Component;
+use Phalcon\Breadcrumbs\Exception\InvalidArgumentException;
+use Phalcon\Breadcrumbs\Exception\OutOfBoundsException;
+use Phalcon\Breadcrumbs\Exception\UnderflowException;
 
 /**
  * \Phalcon\Breadcrumbs
@@ -162,7 +165,7 @@ class Breadcrumbs extends Component
         try {
             if (!is_string($separator)) {
                 $type = gettype($separator);
-                throw new \InvalidArgumentException(
+                throw new InvalidArgumentException(
                     "Expected value of separator to be string type, {$type} given."
                 );
             }
@@ -226,17 +229,17 @@ class Breadcrumbs extends Component
         try {
             if (!is_string($linked)) {
                 $type = gettype($linked);
-                throw new \InvalidArgumentException("Expected value of first argument to be string, {$type} given.");
+                throw new InvalidArgumentException("Expected value of first argument to be string, {$type} given.");
             }
 
             if (!is_string($notLinked)) {
                 $type = gettype($notLinked);
-                throw new \InvalidArgumentException("Expected value of second argument to be string, {$type} given.");
+                throw new InvalidArgumentException("Expected value of second argument to be string, {$type} given.");
             }
 
             if (!is_string($icon)) {
                 $type = gettype($notLinked);
-                throw new \InvalidArgumentException("Expected value of third argument to be string, {$type} given.");
+                throw new InvalidArgumentException("Expected value of third argument to be string, {$type} given.");
             }
 
             $this->template = [
@@ -285,14 +288,14 @@ class Breadcrumbs extends Component
         try {
             if (!is_string($link) && !is_null($link)) {
                 $type = gettype($link);
-                throw new \InvalidArgumentException(
+                throw new InvalidArgumentException(
                     "Expected value of second argument to be either string or null type, {$type} given."
                 );
             }
 
             if (!is_string($label)) {
                 $type = gettype($label);
-                throw new \InvalidArgumentException(
+                throw new InvalidArgumentException(
                     "Expected value of third argument to be string type, {$type} given."
                 );
             }
@@ -449,12 +452,12 @@ class Breadcrumbs extends Component
 
         try {
             if (empty($this->elements)) {
-                throw new \UnderflowException('Cannot remove crumb from an empty list.');
+                throw new UnderflowException('Cannot remove crumb from an empty list.');
             }
 
             if (!is_string($link) && !is_null($link)) {
                 $type = gettype($link);
-                throw new \InvalidArgumentException(
+                throw new InvalidArgumentException(
                     "Expected value of first argument to be either string or null type, {$type} given."
                 );
             }
@@ -497,12 +500,12 @@ class Breadcrumbs extends Component
         $id = $url;
         try {
             if (empty($this->elements)) {
-                throw new \UnderflowException('Cannot update on an empty breadcrumbs list.');
+                throw new UnderflowException('Cannot update on an empty breadcrumbs list.');
             }
 
             if (!is_string($id) && !is_null($id)) {
                 $type = gettype($id);
-                throw new \InvalidArgumentException(
+                throw new InvalidArgumentException(
                     "Expected value of second argument to be either string or null type, {$type} given."
                 );
             }
@@ -512,7 +515,7 @@ class Breadcrumbs extends Component
             }
 
             if (!array_key_exists($id, $this->elements)) {
-                throw new \OutOfBoundsException(
+                throw new OutOfBoundsException(
                     sprintf("No such url '%s' in breadcrumbs list", is_null($url) ? 'null' : $id)
                 );
             }

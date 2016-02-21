@@ -6,6 +6,7 @@
 * Detect empty `Breadcrumbs::$elements` on update or remove
 * Added `Breadcrumbs::setTemplate` to set rendering template
 * Added the events: `breadcrumbs:beforeSetTemplate` and `breadcrumbs:afterSetTemplate`
+* Introduced domain exceptions
 
 # [1.0.0](https://github.com/phalcongelist/breadcrumbs/releases/tag/v1.0.0) (2016-02-21)
 * Initial release
