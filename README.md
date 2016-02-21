@@ -198,7 +198,7 @@ breadcrumbs:beforeTranslate
 breadcrumbs:afterTranslate
 breadcrumbs:beforeLogging
 breadcrumbs:afterLogging
-breadcrumbs:beforeLogging
+breadcrumbs:beforeRemove
 breadcrumbs:afterRemove
 breadcrumbs:beforeUpdate
 breadcrumbs:afterUpdate
