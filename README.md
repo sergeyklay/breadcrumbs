@@ -115,11 +115,9 @@ $this->breadcrumbs->update('/admin/user/remove', ['label' => '<strong class="red
 
 ```php
 $this->breadcrumbs->setTemplate(
-    [
-        'linked'     => '<li><a href="{{link}}">{{icon}}{{label}}</a></li>',
-        'not-linked' => '<li class="active">{{icon}}{{label}}</li>',
-        'icon'       => '<i class="fa fa-dashboard"></i>',
-    ]
+    '<li><a href="{{link}}">{{icon}}{{label}}</a></li>', // linked
+    '<li class="active">{{icon}}{{label}}</li>',         // not linked
+    '<i class="fa fa-dashboard"></i>'                    // first icon
 );
 ```
 

@@ -204,12 +204,10 @@ class Breadcrumbs extends Component
      * * breadcrumbs:afterSetTemplate
      *
      * <code>
-     * $breadcrumbs->setTemplate(
-     *     [
-     *         'linked'     => '<li><a href="{{link}}">{{icon}}{{label}}</a></li>',
-     *         'not-linked' => '<li class="active">{{icon}}{{label}}</li>',
-     *         'icon'       => '<i class="fa fa-dashboard"></i>',
-     *     ]
+     * $this->breadcrumbs->setTemplate(
+     *     '<li><a href="{{link}}">{{icon}}{{label}}</a></li>', // linked
+     *     '<li class="active">{{icon}}{{label}}</li>',         // not linked
+     *     '<i class="fa fa-dashboard"></i>'                    // first icon
      * );
      * </code>
      *
