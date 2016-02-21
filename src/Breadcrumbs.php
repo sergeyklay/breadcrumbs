@@ -209,26 +209,24 @@ class Breadcrumbs extends Component
      *
      * <code>
      * // Adding a crumb with a link
-     * $breadcrumbs->add('/', 'Home');
+     * $breadcrumbs->add('Home', '/');
      *
      * // Adding a crumb without a link (normally the last one)
-     * $breadcrumbs->add('', 'User', false);
+     * $breadcrumbs->add('User', null, ['linked' => false]);
      * </code>
      *
      * @param string $link The link that will be used
      * @param string $label Text displayed in the breadcrumb trail
-     * @param bool $linked If false no link will be returned when rendering [Optional]
+     * @param array  $data The crumb data [Optional]
      * @return $this
      */
-    public function add($link, $label, $linked = true)
+    public function add($label, $link = null, array $data = [])
     {
         try {
-            $id = md5(json_encode([$link, $label, $linked]));
-
-            if (!is_string($link)) {
+            if (!is_string($link) && !is_null($link)) {
                 $type = gettype($link);
                 throw new \InvalidArgumentException(
-                    "Expected value of second argument to be string, {$type} given."
+                    "Expected value of second argument to be either string or null, {$type} given."
                 );
             }
 
@@ -239,10 +237,20 @@ class Breadcrumbs extends Component
                 );
             }
 
+            $linked = true;
+            if (isset($data['linked'])) {
+                $linked = (bool) $data['linked'];
+            }
+
+            $id = $link;
+            if (is_null($id)) {
+                $id = ':null:';
+            }
+
             $this->elements[$id] = [
-                'link' => $link,
-                'label' => $label,
-                'linked' => (bool) $linked
+                'label'  => $label,
+                'link'   => (string) $link,
+                'linked' => $linked,
             ];
         } catch (\Exception $e) {
             $this->log($e->getMessage());
@@ -318,23 +326,33 @@ class Breadcrumbs extends Component
     }
 
     /**
-     * Removes crumb by id.
+     * Gets breadcrumbs as array
      *
-     * @param string $id Crumb ID
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->elements;
+    }
+
+    /**
+     * Removes crumb by url.
+     *
+     * @param string $link Crumb url
      * @return $this
      */
-    public function remove($id)
+    public function remove($link)
     {
         try {
-            if (!is_scalar($id)) {
-                $type = gettype($id);
+            if (!is_string($link)) {
+                $type = gettype($link);
                 throw new \InvalidArgumentException(
-                    "Expected value of first argument to be scalar type, {$type} given."
+                    "Expected value of first argument to be string type, {$type} given."
                 );
             }
 
-            if (!empty($this->elements) && array_key_exists($id, $this->elements)) {
-                unset($this->elements[$id]);
+            if (!empty($this->elements) && array_key_exists($link, $this->elements)) {
+                unset($this->elements[$link]);
             }
         } catch (\Exception $e) {
             $this->log($e->getMessage());
