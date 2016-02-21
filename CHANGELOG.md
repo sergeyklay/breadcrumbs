@@ -1,4 +1,6 @@
-# [1.1.0](https://github.com/phalcongelist/breadcrumbs/releases/tag/v1.1.0) (2016-XX-XX)
+# [1.1.1](https://github.com/phalcongelist/breadcrumbs/releases/tag/v1.1.1) (2016-XX-XX)
+
+# [1.1.0](https://github.com/phalcongelist/breadcrumbs/releases/tag/v1.1.0) (2016-02-22)
 * Added support of events
 * Added `Breadcrumbs::update` to update an existing crumb
 * Added the events: `breadcrumbs:beforeUpdate` and `breadcrumbs:afterUpdate`
