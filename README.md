@@ -62,19 +62,19 @@ $di->setShared('breadcrumbs', function () {
 });
 ```
 
-#### Adding a crumb with a link
+Adding a crumb with a link:
 
 ```php
 $this->breadcrumbs->add('/', 'Home');
 ```
 
-#### Adding a crumb without a link (Normally the last one)
+Adding a crumb without a link (Normally the last one):
 
 ```php
 $this->breadcrumbs->add(null, 'User', false);
 ```
 
-#### Render crumbs
+Render crumbs:
 
 ```php
 $this->breadcrumbs->render();
