@@ -74,10 +74,16 @@ Adding a crumb without a link (Normally the last one):
 $this->breadcrumbs->add('', 'User', false);
 ```
 
-Render crumbs:
+Output crumbs:
 
 ```php
-$this->breadcrumbs->render();
+// Php Engine
+$breadcrumbs->output();
+```
+
+```volt
+// Volt Engine
+breadcrumbs.output();
 ```
 
 ## Copyright
