@@ -89,13 +89,6 @@ class Breadcrumbs extends Component
                 $this->translate = $translate;
             }
         }
-
-        if ($this->getDI()->has('eventsManager')) {
-            $manager = $this->getDI()->getShared('eventsManager');
-            if ($manager instanceof ManagerInterface) {
-                $this->setEventsManager($this->getDI()->getShared('eventsManager'));
-            }
-        }
     }
 
     /**
@@ -207,6 +200,10 @@ class Breadcrumbs extends Component
     /**
      * Adds a new crumb.
      *
+     * Events:
+     * * breadcrumbs:beforeAdd
+     * * breadcrumbs:afterAdd
+     *
      * <code>
      * // Adding a crumb with a link
      * $breadcrumbs->add('Home', '/');
@@ -222,6 +219,11 @@ class Breadcrumbs extends Component
      */
     public function add($label, $link = null, array $data = [])
     {
+        $eventsManager = $this->getEventsManager();
+        if ($eventsManager) {
+            $eventsManager->fire('breadcrumbs:beforeAdd', $this, [$label, $link, $data]);
+        }
+
         try {
             if (!is_string($link) && !is_null($link)) {
                 $type = gettype($link);
@@ -256,11 +258,21 @@ class Breadcrumbs extends Component
             $this->log($e->getMessage());
         }
 
+        if ($eventsManager) {
+            $eventsManager->fire('breadcrumbs:afterAdd', $this, [$label, $link, $data]);
+        }
+
         return $this;
     }
 
     /**
      * Renders and outputs breadcrumbs based on previously set template.
+     *
+     * Events:
+     * * breadcrumbs:beforeOutput
+     * * breadcrumbs:afterOutput
+     * * breadcrumbs:beforeTranslate
+     * * breadcrumbs:afterTranslate
      *
      * <code>
      * // Php Engine
@@ -274,9 +286,17 @@ class Breadcrumbs extends Component
      */
     public function output()
     {
+        $eventsManager = $this->getEventsManager();
+        if ($eventsManager) {
+            $eventsManager->fire('breadcrumbs:beforeOutput', $this);
+        }
+
         if (empty($this->elements)) {
             if (true === $this->implicitFlush) {
                 echo '';
+                if ($eventsManager) {
+                    $eventsManager->fire('breadcrumbs:afterOutput', $this);
+                }
             } else {
                 return '';
             }
@@ -290,7 +310,15 @@ class Breadcrumbs extends Component
             $i++;
             $label = $crumb['label'];
             if ($this->translate) {
+                if ($eventsManager) {
+                    $eventsManager->fire('breadcrumbs:beforeTranslate', $this);
+                }
+
                 $label = $this->translate->query($label);
+
+                if ($eventsManager) {
+                    $eventsManager->fire('breadcrumbs:afterTranslate', $this);
+                }
             }
 
             if ($crumb['linked']) {
@@ -322,6 +350,8 @@ class Breadcrumbs extends Component
         // We return the breadcrumbs as string if the implicitFlush is turned off
         if (false === $this->implicitFlush) {
             return $content;
+        } elseif ($eventsManager) {
+            $eventsManager->fire('breadcrumbs:afterOutput', $this);
         }
     }
 
@@ -338,6 +368,10 @@ class Breadcrumbs extends Component
     /**
      * Removes crumb by url.
      *
+     * Events:
+     * * breadcrumbs:beforeRemove
+     * * breadcrumbs:afterRemove
+     *
      * <core>
      * $this->breadcrumbs->remove('/admin/user/create');
      *
@@ -349,6 +383,11 @@ class Breadcrumbs extends Component
      */
     public function remove($link)
     {
+        $eventsManager = $this->getEventsManager();
+        if ($eventsManager) {
+            $eventsManager->fire('breadcrumbs:beforeRemove', $this, [$link]);
+        }
+
         try {
             if (!is_string($link) && !is_null($link)) {
                 $type = gettype($link);
@@ -368,20 +407,37 @@ class Breadcrumbs extends Component
             $this->log($e->getMessage());
         }
 
+        if ($eventsManager) {
+            $eventsManager->fire('breadcrumbs:afterRemove', $this, [$link]);
+        }
+
         return $this;
     }
 
     /**
      * Logs error messages.
      *
+     * Events:
+     * * breadcrumbs:beforeLogging
+     * * breadcrumbs:afterLogging
+     *
      * @param $message
      */
     protected function log($message)
     {
+        $eventsManager = $this->getEventsManager();
+        if ($eventsManager) {
+            $eventsManager->fire('breadcrumbs:beforeLogging', $this, [$message]);
+        }
+
         if ($this->logger) {
             $this->logger->error($message);
         } else {
             error_log($message);
+        }
+
+        if ($eventsManager) {
+            $eventsManager->fire('breadcrumbs:afterLogging', $this, [$message]);
         }
     }
 }

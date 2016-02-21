@@ -157,6 +157,45 @@ $di->setShared('breadcrumbs', function () {
 });
 ```
 
+### Events
+
+```php
+use Phalcon\Breadcrumbs;
+use My\Awesome\Listener;
+use Phalcon\Events\Manager as EventsManager;
+
+// Initialize the Events Manager.
+$di->setShared('eventsManager', function () {
+    return new EventsManager;
+});
+
+// Initialize the Breadcrumbs component.
+$di->setShared('breadcrumbs', function () use ($di) {
+    $manager = $di->getShared('eventsManager');
+    $manager->attach('breadcrumbs', new Listener);
+
+    $breadcrumbs = new Breadcrumbs;
+    $breadcrumbs->setEventsManager($manager);
+
+    return $breadcrumbs;
+});
+```
+
+Available events:
+
+```
+breadcrumbs:beforeAdd
+breadcrumbs:afterAdd
+breadcrumbs:beforeOutput
+breadcrumbs:afterOutput
+breadcrumbs:beforeTranslate
+breadcrumbs:afterTranslate
+breadcrumbs:beforeLogging
+breadcrumbs:afterLogging
+breadcrumbs:beforeLogging
+breadcrumbs:afterRemove
+```
+
 ## Copyright
 
 Phalcon Breadcrumbs is open-sourced software licensed under the [New BSD License][:license:].
