@@ -65,11 +65,7 @@ $di->setShared('breadcrumbs', function () {
 Adding a crumb with a link:
 
 ```php
-$this->breadcrumbs->add(
-    'Home',
-    $this->router->getRouteByName('home')->getCompiledPattern()
-);
-
+$this->breadcrumbs->add('Home', '/');
 ```
 
 Adding a crumb without a link (normally the last one):
@@ -98,6 +94,15 @@ Change crumb separator:
 
 ```php
 $this->breadcrumbs->setSeparator(' &raquo; ');
+```
+
+Delete a crumb (by url):
+
+```php
+$this->breadcrumbs->remove('/admin/user/create');
+
+// remove a crumb without an url
+$this->breadcrumbs->remove(null);
 ```
 
 ## Copyright

@@ -171,7 +171,7 @@ class Breadcrumbs extends Component
             if (!is_string($separator)) {
                 $type = gettype($separator);
                 throw new \InvalidArgumentException(
-                    "Expected value of separator to be string, {$type} given."
+                    "Expected value of separator to be string type, {$type} given."
                 );
             }
 
@@ -226,14 +226,14 @@ class Breadcrumbs extends Component
             if (!is_string($link) && !is_null($link)) {
                 $type = gettype($link);
                 throw new \InvalidArgumentException(
-                    "Expected value of second argument to be either string or null, {$type} given."
+                    "Expected value of second argument to be either string or null type, {$type} given."
                 );
             }
 
             if (!is_string($label)) {
                 $type = gettype($label);
                 throw new \InvalidArgumentException(
-                    "Expected value of third argument to be string, {$type} given."
+                    "Expected value of third argument to be string type, {$type} given."
                 );
             }
 
@@ -338,17 +338,27 @@ class Breadcrumbs extends Component
     /**
      * Removes crumb by url.
      *
-     * @param string $link Crumb url
+     * <core>
+     * $this->breadcrumbs->remove('/admin/user/create');
+     *
+     * // remove a crumb without an url
+     * $this->breadcrumbs->remove(null);
+     * </code>
+     * @param string|null $link Crumb url
      * @return $this
      */
     public function remove($link)
     {
         try {
-            if (!is_string($link)) {
+            if (!is_string($link) && !is_null($link)) {
                 $type = gettype($link);
                 throw new \InvalidArgumentException(
-                    "Expected value of first argument to be string type, {$type} given."
+                    "Expected value of first argument to be either string or null type, {$type} given."
                 );
+            }
+
+            if (is_null($link)) {
+                $link = ':null:';
             }
 
             if (!empty($this->elements) && array_key_exists($link, $this->elements)) {
