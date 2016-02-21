@@ -66,6 +66,12 @@ class Breadcrumbs extends Component
     protected $translate;
 
     /**
+     * Use implicit flush?
+     * @var bool
+     */
+    protected $implicitFlush = true;
+
+    /**
      * Breadcrumbs constructor.
      */
     public function __construct()
@@ -93,7 +99,7 @@ class Breadcrumbs extends Component
     }
 
     /**
-     * Gets internal translate adapter
+     * Gets internal translate adapter.
      *
      * @return null|Translate\AdapterInterface
      */
@@ -103,7 +109,7 @@ class Breadcrumbs extends Component
     }
 
     /**
-     * Sets internal translate adapter
+     * Sets internal translate adapter.
      *
      * @param Translate\AdapterInterface $translate Translate adapter
      * @return $this
@@ -116,7 +122,7 @@ class Breadcrumbs extends Component
     }
 
     /**
-     * Gets internal logger
+     * Gets internal logger.
      *
      * @return null|Logger\AdapterInterface
      */
@@ -126,7 +132,7 @@ class Breadcrumbs extends Component
     }
 
     /**
-     * Sets internal logger
+     * Sets internal logger.
      *
      * @param Logger\AdapterInterface $logger
      */
@@ -136,7 +142,7 @@ class Breadcrumbs extends Component
     }
 
     /**
-     * Gets crumb separator
+     * Gets crumb separator.
      *
      * @return string
      */
@@ -146,7 +152,7 @@ class Breadcrumbs extends Component
     }
 
     /**
-     * Sets crumb separator
+     * Sets crumb separator.
      *
      * @param string $separator Separator
      * @return $this
@@ -170,7 +176,20 @@ class Breadcrumbs extends Component
     }
 
     /**
-     * Adds a new crumb
+     * Set whether the output must be implicitly flushed to the output or returned as string.
+     *
+     * @param bool $implicitFlush Implicit flush mode
+     * @return $this
+     */
+    public function setImplicitFlush($implicitFlush)
+    {
+        $this->implicitFlush = (bool) $implicitFlush;
+
+        return $this;
+    }
+
+    /**
+     * Adds a new crumb.
      *
      * @param string $link The link that will be used
      * @param string $label Text displayed in the breadcrumb trail
@@ -209,15 +228,31 @@ class Breadcrumbs extends Component
     }
 
     /**
-     * Render breadcrumb output based on previously set template
+     * Renders and outputs breadcrumbs based on previously set template.
+     *
+     * <code>
+     * // Php Engine
+     * $breadcrumbs->output();
+     *
+     * // Volt Engine
+     * breadcrumbs.output();
+     * </code>
+     *
+     * @return string|void
      */
-    public function render()
+    public function output()
     {
         if (empty($this->elements)) {
-            return;
+            if (true === $this->implicitFlush) {
+                echo '';
+            } else {
+                return '';
+            }
         }
 
-        $output = '';
+        // We create the message with implicit flush or other
+        $content = '';
+
         $i = 0;
         foreach ($this->elements as $key => $crumb) {
             $label = $crumb['label'];
@@ -226,28 +261,37 @@ class Breadcrumbs extends Component
             }
 
             if ($crumb['linked']) {
-                $output .= str_replace(
+                $htmlCrumb = str_replace(
                     ['{{link}}', '{{label}}'],
                     [$crumb['link'], $label],
                     $this->template['linked']
                 );
             } else {
-                $output .= str_replace('{{label}}', $label, $this->template['not-linked']);
+                $htmlCrumb = str_replace('{{label}}', $label, $this->template['not-linked']);
             }
 
             if (1 == $i) {
-                $output = str_replace('{{icon}}', $this->template['icon'], $output);
+                $htmlCrumb = str_replace('{{icon}}', $this->template['icon'], $htmlCrumb);
             }
 
             $this->remove($key);
-            $output .= (!empty($this->elements) ? $this->separator : '');
+            $htmlCrumb .= (!empty($this->elements) ? $this->separator : '');
+
+            if (true === $this->implicitFlush) {
+                echo $htmlCrumb;
+            } else {
+                $content .= $htmlCrumb;
+            }
         }
 
-        echo $output;
+        // We return the breadcrumbs as string if the implicitFlush is turned off
+        if (false === $this->implicitFlush) {
+            return $content;
+        }
     }
 
     /**
-     * Removes crumb by id
+     * Removes crumb by id.
      *
      * @param string $id Crumb ID
      * @return $this
@@ -272,6 +316,11 @@ class Breadcrumbs extends Component
         return $this;
     }
 
+    /**
+     * Logs error messages.
+     *
+     * @param $message
+     */
     protected function log($message)
     {
         if ($this->logger) {
