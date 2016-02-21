@@ -170,7 +170,7 @@ class Breadcrumbs extends Component
 
             $this->separator = $separator;
         } catch (\Exception $e) {
-            $this->log($e->getMessage());
+            $this->log($e);
         }
 
         return $this;
@@ -255,7 +255,7 @@ class Breadcrumbs extends Component
                 'linked' => $linked,
             ];
         } catch (\Exception $e) {
-            $this->log($e->getMessage());
+            $this->log($e);
         }
 
         if ($eventsManager) {
@@ -405,7 +405,7 @@ class Breadcrumbs extends Component
                 unset($this->elements[$link]);
             }
         } catch (\Exception $e) {
-            $this->log($e->getMessage());
+            $this->log($e);
         }
 
         if ($eventsManager) {
@@ -457,7 +457,7 @@ class Breadcrumbs extends Component
 
             $this->elements[$id] = array_merge($this->elements[$id], $data);
         } catch (\Exception $e) {
-            $this->log($e->getMessage());
+            $this->log($e);
         }
 
         return $this;
@@ -470,23 +470,23 @@ class Breadcrumbs extends Component
      * * breadcrumbs:beforeLogging
      * * breadcrumbs:afterLogging
      *
-     * @param $message
+     * @param \Exception $e
      */
-    protected function log($message)
+    protected function log(\Exception $e)
     {
         $eventsManager = $this->getEventsManager();
         if ($eventsManager) {
-            $eventsManager->fire('breadcrumbs:beforeLogging', $this, [$message]);
+            $eventsManager->fire('breadcrumbs:beforeLogging', $this, [$e]);
         }
 
         if ($this->logger) {
-            $this->logger->error($message);
+            $this->logger->error($e->getMessage());
         } else {
-            error_log($message);
+            error_log($e->getMessage());
         }
 
         if ($eventsManager) {
-            $eventsManager->fire('breadcrumbs:afterLogging', $this, [$message]);
+            $eventsManager->fire('breadcrumbs:afterLogging', $this, [$e]);
         }
     }
 }
