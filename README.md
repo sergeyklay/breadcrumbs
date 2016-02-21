@@ -1,6 +1,6 @@
-# Phalcon Breadcrumbs
+# Phalcon Breadcrumbs [![Build Status](https://travis-ci.org/phalcongelist/breadcrumbs.svg?branch=master)](https://travis-ci.org/phalcongelist/breadcrumbs)
 
-[![Build Status](https://travis-ci.org/phalcongelist/breadcrumbs.svg?branch=master)](https://travis-ci.org/phalcongelist/breadcrumbs)
+![Breadcrumbs screenshot](https://github.com/phalcongelist/breadcrumbs/blob/master/docs/breadcrumbs.png)
 
 Phalcon Breadcrumbs is a powerful and flexible component for building site breadcrumbs.
 You can adapt it to your own needs or improve it if you want.
