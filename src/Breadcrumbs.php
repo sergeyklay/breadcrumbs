@@ -176,7 +176,7 @@ class Breadcrumbs extends Component
     }
 
     /**
-     * Set whether the output must be implicitly flushed to the output or returned as string.
+     * Sets whether the output must be implicitly flushed to the output or returned as string.
      *
      * <code>
      * // Enable implicit flush
@@ -192,6 +192,67 @@ class Breadcrumbs extends Component
     public function setImplicitFlush($implicitFlush)
     {
         $this->implicitFlush = (bool) $implicitFlush;
+
+        return $this;
+    }
+
+    /**
+     * Sets rendering template.
+     *
+     * Events:
+     * * breadcrumbs:beforeSetTemplate
+     * * breadcrumbs:afterSetTemplate
+     *
+     * <code>
+     * $breadcrumbs->setTemplate(
+     *     [
+     *         'linked'     => '<li><a href="{{link}}">{{icon}}{{label}}</a></li>',
+     *         'not-linked' => '<li class="active">{{icon}}{{label}}</li>',
+     *         'icon'       => '<i class="fa fa-dashboard"></i>',
+     *     ]
+     * );
+     * </code>
+     *
+     * @param string $linked    Linked template
+     * @param string $notLinked Not-linked template
+     * @param string $icon      Icon template
+     * @return $this
+     */
+    public function setTemplate($linked, $notLinked, $icon)
+    {
+        $eventsManager = $this->getEventsManager();
+        if ($eventsManager) {
+            $eventsManager->fire('breadcrumbs:beforeSetTemplate', $this, [$linked, $notLinked, $icon]);
+        }
+
+        try {
+            if (!is_string($linked)) {
+                $type = gettype($linked);
+                throw new \InvalidArgumentException("Expected value of first argument to be string, {$type} given.");
+            }
+
+            if (!is_string($notLinked)) {
+                $type = gettype($notLinked);
+                throw new \InvalidArgumentException("Expected value of second argument to be string, {$type} given.");
+            }
+
+            if (!is_string($icon)) {
+                $type = gettype($notLinked);
+                throw new \InvalidArgumentException("Expected value of third argument to be string, {$type} given.");
+            }
+
+            $this->template = [
+                'linked'     => $linked,
+                'not-linked' => $notLinked,
+                'icon'       => $notLinked,
+            ];
+
+            if ($eventsManager) {
+                $eventsManager->fire('breadcrumbs:afterSetTemplate', $this, [$linked, $notLinked, $icon]);
+            }
+        } catch (\Exception $e) {
+            $this->log($e);
+        }
 
         return $this;
     }

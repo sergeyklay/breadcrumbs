@@ -111,6 +111,18 @@ $this->breadcrumbs->remove(null);
 $this->breadcrumbs->update('/admin/user/remove', ['label' => '<strong class="red">Remove</strong>']);
 ```
 
+**Sets rendering template:**
+
+```php
+$breadcrumbs->setTemplate(
+    [
+        'linked'     => '<li><a href="{{link}}">{{icon}}{{label}}</a></li>',
+        'not-linked' => '<li class="active">{{icon}}{{label}}</li>',
+        'icon'       => '<i class="fa fa-dashboard"></i>',
+    ]
+);
+```
+
 **Add multi-language support:**
 
 ```php
@@ -210,6 +222,8 @@ breadcrumbs:beforeRemove
 breadcrumbs:afterRemove
 breadcrumbs:beforeUpdate
 breadcrumbs:afterUpdate
+breadcrumbs:beforeSetTemplate
+breadcrumbs:afterSetTemplate
 ```
 
 ## Copyright
