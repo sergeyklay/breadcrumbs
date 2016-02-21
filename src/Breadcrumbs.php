@@ -279,6 +279,7 @@ class Breadcrumbs extends Component
 
         $i = 0;
         foreach ($this->elements as $key => $crumb) {
+            $i++;
             $label = $crumb['label'];
             if ($this->translate) {
                 $label = $this->translate->query($label);
@@ -296,6 +297,8 @@ class Breadcrumbs extends Component
 
             if (1 == $i) {
                 $htmlCrumb = str_replace('{{icon}}', $this->template['icon'], $htmlCrumb);
+            } else {
+                $htmlCrumb = str_replace('{{icon}}', '', $htmlCrumb);
             }
 
             $this->remove($key);

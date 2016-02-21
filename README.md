@@ -15,7 +15,7 @@ The master branch will always contain the latest stable version. If you wish
 to check older versions or newer ones currently under development, please
 switch to the relevant branch/tag.
 
-## Get Started
+## Getting Started
 
 ### Requirements
 
@@ -49,7 +49,7 @@ Run the composer installer:
 $ php composer.phar install
 ```
 
-### Usage
+### Define your breadcrumbs
 
 We recommend registering it with your application's services for even easier use:
 
@@ -65,7 +65,7 @@ $di->setShared('breadcrumbs', function () {
 Adding a crumb with a link:
 
 ```php
-$this->breadcrumbs->add('/', 'Home');
+$this->breadcrumbs->add($router->getRouteByName('home')->compilePattern(), 'Home');
 ```
 
 Adding a crumb without a link (normally the last one):
@@ -78,12 +78,16 @@ Output crumbs:
 
 ```php
 // Php Engine
-$this->breadcrumbs->output();
+<ol class="breadcrumb">
+    <?php $this->breadcrumbs->output() ?>
+</ol>
 ```
 
 ```volt
 // Volt Engine
-breadcrumbs.output();
+<ol class="breadcrumb">
+  {{ breadcrumbs.output() }}
+</ol>
 ```
 
 Change crumb separator:
