@@ -19,7 +19,6 @@
 
 namespace Phalcon;
 
-use Phalcon\DiInterface;
 use Phalcon\Mvc\User\Component;
 use Phalcon\Events\ManagerInterface;
 
@@ -66,6 +65,9 @@ class Breadcrumbs extends Component
      */
     protected $translate;
 
+    /**
+     * Breadcrumbs constructor.
+     */
     public function __construct()
     {
         if ($this->getDI()->has('logger')) {
@@ -83,7 +85,10 @@ class Breadcrumbs extends Component
         }
 
         if ($this->getDI()->has('eventsManager')) {
-            $this->setEventsManager($this->getDI()->getShared('eventsManager'));
+            $manager = $this->getDI()->getShared('eventsManager');
+            if ($manager instanceof ManagerInterface) {
+                $this->setEventsManager($this->getDI()->getShared('eventsManager'));
+            }
         }
     }
 
@@ -177,10 +182,10 @@ class Breadcrumbs extends Component
         try {
             $id = md5(json_encode([$link, $label, $linked]));
 
-            if (!is_string($link) && !is_null($link)) {
+            if (!is_string($link)) {
                 $type = gettype($link);
                 throw new \InvalidArgumentException(
-                    "Expected value of second argument to be either string or null, {$type} given."
+                    "Expected value of second argument to be string, {$type} given."
                 );
             }
 
@@ -252,7 +257,9 @@ class Breadcrumbs extends Component
         try {
             if (!is_scalar($id)) {
                 $type = gettype($id);
-                throw new \InvalidArgumentException("Expected value of first argument to be string, {$type} given.");
+                throw new \InvalidArgumentException(
+                    "Expected value of first argument to be scalar type, {$type} given."
+                );
             }
 
             if (!empty($this->elements) && array_key_exists($id, $this->elements)) {
