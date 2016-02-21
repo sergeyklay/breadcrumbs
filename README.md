@@ -62,24 +62,26 @@ $di->setShared('breadcrumbs', function () {
 });
 ```
 
-Adding a crumb with a link:
+**Adding a crumb with a link:**
 
 ```php
 $this->breadcrumbs->add('Home', '/');
 ```
 
-Adding a crumb without a link (normally the last one):
+**Adding a crumb without a link (normally the last one):**
 
 ```php
 $this->breadcrumbs->add('User', null, ['linked' => false]);
 ```
 
-Output crumbs:
+**Output crumbs:**
 
 ```php
-// Php Engine
 <ol class="breadcrumb">
-    <?php $this->breadcrumbs->output() ?>
+    <?php
+        // Php Engine
+        $this->breadcrumbs->output();
+    ?>
 </ol>
 ```
 
@@ -90,19 +92,44 @@ Output crumbs:
 </ol>
 ```
 
-Change crumb separator:
+**Change crumb separator:**
 
 ```php
 $this->breadcrumbs->setSeparator(' &raquo; ');
 ```
 
-Delete a crumb (by url):
+**Delete a crumb (by url):**
 
 ```php
 $this->breadcrumbs->remove('/admin/user/create');
 
 // remove a crumb without an url
 $this->breadcrumbs->remove(null);
+```
+
+**Add multi-language support:**
+
+```php
+
+use Phalcon\Translate\Adapter\NativeArray as Translator;
+use Phalcon\Breadcrumbs;
+
+$messages = [
+    'crumb-home'     => 'Home',
+    'crumb-user'     => 'User',
+    'crumb-settings' => 'Settings',
+    'crumb-profile'  => 'Profile',
+];
+
+// Initialize the Translate adapter.
+$di->setShared('translate', function () {
+    return new new Translator(['content' => $messages]);
+});
+
+// Initialize the Breadcrumbs component.
+$di->setShared('breadcrumbs', function () {
+    return new Breadcrumbs;
+});
 ```
 
 ## Copyright
