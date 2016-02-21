@@ -1,6 +1,6 @@
 {
   "name":        "phalcongelist/breadcrumbs",
-  "description": "Phalcon Official Forum",
+  "description": "Powerful and flexible component for building site breadcrumbs in Phalcon 2+.",
   "keywords":    ["phalcon", "breadcrumbs", "crumbs"],
   "type":        "library",
   "license":     "BSD-3-Clause",
