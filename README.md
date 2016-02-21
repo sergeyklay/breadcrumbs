@@ -105,6 +105,12 @@ $this->breadcrumbs->remove('/admin/user/create');
 $this->breadcrumbs->remove(null);
 ```
 
+**Update an existing crumb:**
+
+```php
+$this->breadcrumbs->update('/admin/user/remove', ['label' => '<strong class="red">Remove</strong>']);
+```
+
 **Add multi-language support:**
 
 ```php
@@ -194,6 +200,8 @@ breadcrumbs:beforeLogging
 breadcrumbs:afterLogging
 breadcrumbs:beforeLogging
 breadcrumbs:afterRemove
+breadcrumbs:beforeUpdate
+breadcrumbs:afterUpdate
 ```
 
 ## Copyright

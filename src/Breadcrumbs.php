@@ -378,6 +378,7 @@ class Breadcrumbs extends Component
      * // remove a crumb without an url
      * $this->breadcrumbs->remove(null);
      * </code>
+     *
      * @param string|null $link Crumb url
      * @return $this
      */
@@ -409,6 +410,54 @@ class Breadcrumbs extends Component
 
         if ($eventsManager) {
             $eventsManager->fire('breadcrumbs:afterRemove', $this, [$link]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Update an existing crumb.
+     *
+     * Events:
+     * * breadcrumbs:beforeUpdate
+     * * breadcrumbs:afterUpdate
+     *
+     * <core>
+     * $this->breadcrumbs->update('/admin/user/remove', ['label' => '<strong class="red">Remove</strong>']);
+     * </code>
+     *
+     * @param string|null $url  Crumb URL
+     * @param array       $data Crumb data
+     * @return $this
+     */
+    public function update($url, array $data)
+    {
+        $id = $url;
+        try {
+            if (empty($this->elements)) {
+                return $this;
+            }
+
+            if (!is_string($id) && !is_null($id)) {
+                $type = gettype($id);
+                throw new \InvalidArgumentException(
+                    "Expected value of second argument to be either string or null type, {$type} given."
+                );
+            }
+
+            if (!is_null($url)) {
+                $id = ':null:';
+            }
+
+            if (!array_key_exists($id, $this->elements)) {
+                throw new \OutOfBoundsException(
+                    sprintf("No such url '%s' in breadcrumbs list", is_null($url) ? 'null' : $id)
+                );
+            }
+
+            $this->elements[$id] = array_merge($this->elements[$id], $data);
+        } catch (\Exception $e) {
+            $this->log($e->getMessage());
         }
 
         return $this;
