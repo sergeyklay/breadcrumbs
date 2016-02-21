@@ -78,7 +78,7 @@ Output crumbs:
 
 ```php
 // Php Engine
-$breadcrumbs->output();
+$this->breadcrumbs->output();
 ```
 
 ```volt

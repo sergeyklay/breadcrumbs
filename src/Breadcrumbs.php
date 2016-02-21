@@ -256,7 +256,7 @@ class Breadcrumbs extends Component
      *
      * <code>
      * // Php Engine
-     * $breadcrumbs->output();
+     * $this->breadcrumbs->output();
      *
      * // Volt Engine
      * {{ breadcrumbs.output() }};
