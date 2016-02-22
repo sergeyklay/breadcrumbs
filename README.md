@@ -38,7 +38,7 @@ Create the composer.json file as follows:
 ```json
 {
     "require": {
-        "phalcongelist/breadcrumbs": "^1.0"
+        "phalcongelist/breadcrumbs": "^1.1"
     }
 }
 ```
@@ -135,7 +135,7 @@ $messages = [
 ];
 
 // Initialize the Translate adapter.
-$di->setShared('translate', function () {
+$di->setShared('translate', function () use ($messages) {
     return new Translator(['content' => $messages]);
 });
 

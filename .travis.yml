@@ -24,6 +24,8 @@ before_install:
 
 script:
   - vendor/bin/phpcs --standard=PSR2 --colors --extensions=php --encoding=utf-8 src/
+  - vendor/bin/codecept build
+  - vendor/bin/codecept run
 
 notifications:
   email:
