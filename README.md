@@ -121,7 +121,7 @@ $this->breadcrumbs->setTemplate(
 );
 ```
 
-**Add multi-language support:**
+**Multi-language support:**
 
 ```php
 use Phalcon\Translate\Adapter\NativeArray as Translator;
@@ -145,7 +145,7 @@ $di->setShared('breadcrumbs', function () {
 });
 ```
 
-**Custom logging when errors happen:**
+**Errors logging:**
 
 ```php
 use Phalcon\Logger\Formatter\Line as FormatterLine;
@@ -154,12 +154,8 @@ use Phalcon\Breadcrumbs;
 
 // Initialize the Logger.
 $di->setShared('logger', function ($filename = null, $format = null) use ($config) {
-    $format   = $format ?: $config->get('logger')->format;
-    $filename = trim($filename ?: $config->get('logger')->filename, '\\/');
-    $path     = rtrim($config->get('logger')->path, '\\/') . DIRECTORY_SEPARATOR;
-
-    $formatter = new FormatterLine($format, $config->get('logger')->date);
-    $logger = new FileLogger($path . $filename);
+    $formatter = new FormatterLine($config->get('logger')->format, $config->get('logger')->date);
+    $logger = new FileLogger($config->get('logger')->path . $config->get('logger')->filename);
 
     $logger->setFormatter($formatter);
     $logger->setLogLevel($config->get('logger')->logLevel);
