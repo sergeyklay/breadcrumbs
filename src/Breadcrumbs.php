@@ -245,7 +245,7 @@ class Breadcrumbs extends Component
             $this->template = [
                 'linked'     => $linked,
                 'not-linked' => $notLinked,
-                'icon'       => $notLinked,
+                'icon'       => $icon
             ];
 
             if ($eventsManager) {
