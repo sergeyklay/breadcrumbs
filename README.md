@@ -22,7 +22,7 @@ switch to the relevant branch/tag.
 To use this component, you need at least:
 
 * [Composer][:composer:]
-* PHP >= 5.4
+* PHP >= 5.5
 * Latest stable [Phalcon Framework release][:phalcon:] extension enabled
 
 ### Installing
@@ -38,7 +38,7 @@ Create the composer.json file as follows:
 ```json
 {
     "require": {
-        "phalcongelist/breadcrumbs": "^1.1"
+        "phalcongelist/breadcrumbs": "^1.2"
     }
 }
 ```
@@ -109,6 +109,11 @@ $this->breadcrumbs->remove(null);
 
 ```php
 $this->breadcrumbs->update('/admin/user/remove', ['label' => '<strong class="red">Remove</strong>']);
+```
+
+**Count crumbs:**
+```php
+$this->breadcrumbs->count();
 ```
 
 **Sets rendering template:**

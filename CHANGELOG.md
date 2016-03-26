@@ -1,5 +1,11 @@
-# [1.1.1](https://github.com/phalcongelist/breadcrumbs/releases/tag/v1.1.1) (2016-XX-XX)
+# [1.2.0](https://github.com/phalcongelist/breadcrumbs/releases/tag/v1.2.0) (2016-03-26)
+* PHP 5.4 is now fully deprecated
+* Added `Breadcrumbs::count`
+* Fixed building with Phalcon 2.1.x
+
+# [1.1.1](https://github.com/phalcongelist/breadcrumbs/releases/tag/v1.1.1) (2016-03-12)
 * Added Codeception support
+* Cleanup documentation
 
 # [1.1.0](https://github.com/phalcongelist/breadcrumbs/releases/tag/v1.1.0) (2016-02-22)
 * Added support of events
