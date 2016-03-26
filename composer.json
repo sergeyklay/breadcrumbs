@@ -23,8 +23,8 @@
     "forum":  "https://forum.phalconphp.com/"
   },
   "require": {
-    "php": ">= 5.4",
-    "ext-phalcon": ">=2.0"
+    "php": ">= 5.5",
+    "ext-phalcon": "~2.0"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^2.5",
@@ -39,7 +39,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "1.1.x-dev"
+      "dev-master": "1.2.x-dev"
     }
   }
 }
