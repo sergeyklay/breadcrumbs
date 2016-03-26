@@ -554,4 +554,14 @@ class Breadcrumbs extends Component
             $eventsManager->fire('breadcrumbs:afterLogging', $this, [$e]);
         }
     }
+    
+    /**
+     * Count breadcrumbs
+     *
+     * @return integer
+     */
+    public function count()
+    {
+        return count($this->elements);
+    }
 }
