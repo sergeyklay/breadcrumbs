@@ -1,7 +1,6 @@
 language: php
 
 php:
-  - 5.4
   - 5.5
   - 5.6
 
@@ -18,7 +17,7 @@ before_install:
   - php --ri phalcon
   - travis_retry composer self-update -q
   - if [ -n "$GH_TOKEN" ]; then composer config github-oauth.github.com ${GH_TOKEN}; fi;
-  - travis_retry composer install --prefer-dist --no-interaction
+  - travis_retry composer install --prefer-dist --no-interaction --ignore-platform-reqs
   - ulimit -c unlimited -S || true
   - stty cols 160
 
