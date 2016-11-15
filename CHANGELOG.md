@@ -1,4 +1,7 @@
-# [1.2.1](https://github.com/phalcongelist/breadcrumbs/releases/tag/v1.2.1) (XXXX-XX-XX)
+# [1.2.2](https://github.com/phalcongelist/breadcrumbs/releases/tag/v1.2.2) (XXXX-XX-XX)
+
+
+# [1.2.1](https://github.com/phalcongelist/breadcrumbs/releases/tag/v1.2.1) (2016-11-15)
 * Updated dev-dependencies
 * Minor grammar improvements
 
