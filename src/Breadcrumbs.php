@@ -7,7 +7,7 @@
  | Copyright (c) 2016 Phalcon Framework Team                              |
  +------------------------------------------------------------------------+
  | This source file is subject to the New BSD License that is bundled     |
- | with this package in the file docs/LICENSE.txt.                        |
+ | with this package in the file LICENSE.txt.                             |
  |                                                                        |
  | If you did not receive a copy of the license and are unable to         |
  | obtain it through the world-wide-web, please send an email             |
@@ -166,7 +166,7 @@ class Breadcrumbs extends Component
             if (!is_string($separator)) {
                 $type = gettype($separator);
                 throw new InvalidArgumentException(
-                    "Expected value of separator to be string type, {$type} given."
+                    "Expected value of the separator to be string type, {$type} given."
                 );
             }
 
@@ -229,17 +229,17 @@ class Breadcrumbs extends Component
         try {
             if (!is_string($linked)) {
                 $type = gettype($linked);
-                throw new InvalidArgumentException("Expected value of first argument to be string, {$type} given.");
+                throw new InvalidArgumentException("Expected value of the first argument to be string, {$type} given.");
             }
 
             if (!is_string($notLinked)) {
                 $type = gettype($notLinked);
-                throw new InvalidArgumentException("Expected value of second argument to be string, {$type} given.");
+                throw new InvalidArgumentException("Expected value of the second argument to be string, {$type} given.");
             }
 
             if (!is_string($icon)) {
                 $type = gettype($notLinked);
-                throw new InvalidArgumentException("Expected value of third argument to be string, {$type} given.");
+                throw new InvalidArgumentException("Expected value of the third argument to be string, {$type} given.");
             }
 
             $this->template = [
@@ -289,14 +289,14 @@ class Breadcrumbs extends Component
             if (!is_string($link) && !is_null($link)) {
                 $type = gettype($link);
                 throw new InvalidArgumentException(
-                    "Expected value of second argument to be either string or null type, {$type} given."
+                    "Expected value of the second argument to be either string or null type, {$type} given."
                 );
             }
 
             if (!is_string($label)) {
                 $type = gettype($label);
                 throw new InvalidArgumentException(
-                    "Expected value of third argument to be string type, {$type} given."
+                    "Expected value of the third argument to be string type, {$type} given."
                 );
             }
 
@@ -458,7 +458,7 @@ class Breadcrumbs extends Component
             if (!is_string($link) && !is_null($link)) {
                 $type = gettype($link);
                 throw new InvalidArgumentException(
-                    "Expected value of first argument to be either string or null type, {$type} given."
+                    "Expected value of the first argument to be either string or null type, {$type} given."
                 );
             }
 
@@ -506,7 +506,7 @@ class Breadcrumbs extends Component
             if (!is_string($id) && !is_null($id)) {
                 $type = gettype($id);
                 throw new InvalidArgumentException(
-                    "Expected value of second argument to be either string or null type, {$type} given."
+                    "Expected value of the second argument to be either string or null type, {$type} given."
                 );
             }
 
@@ -554,7 +554,7 @@ class Breadcrumbs extends Component
             $eventsManager->fire('breadcrumbs:afterLogging', $this, [$e]);
         }
     }
-    
+
     /**
      * Count breadcrumbs
      *
