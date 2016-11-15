@@ -1,3 +1,7 @@
+# [1.2.1](https://github.com/phalcongelist/breadcrumbs/releases/tag/v1.2.1) (XXXX-XX-XX)
+* Updated dev-dependencies
+* Minor grammar improvements
+
 # [1.2.0](https://github.com/phalcongelist/breadcrumbs/releases/tag/v1.2.0) (2016-03-26)
 * PHP 5.4 is now fully deprecated
 * Added `Breadcrumbs::count`
