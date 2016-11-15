@@ -11,7 +11,7 @@
  |                                                                        |
  | If you did not receive a copy of the license and are unable to         |
  | obtain it through the world-wide-web, please send an email             |
- | to serghei@phalconphp.com so I can send you a copy immediately.        |
+ | to license@phalconphp.com so I can send you a copy immediately.        |
  +------------------------------------------------------------------------+
  | Authors: Serghei Iakovlev <serghei@phalconphp.com>                     |
  +------------------------------------------------------------------------+
@@ -234,7 +234,9 @@ class Breadcrumbs extends Component
 
             if (!is_string($notLinked)) {
                 $type = gettype($notLinked);
-                throw new InvalidArgumentException("Expected value of the second argument to be string, {$type} given.");
+                throw new InvalidArgumentException(
+                    "Expected value of the second argument to be string, {$type} given."
+                );
             }
 
             if (!is_string($icon)) {

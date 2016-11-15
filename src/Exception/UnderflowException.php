@@ -11,7 +11,7 @@
  |                                                                        |
  | If you did not receive a copy of the license and are unable to         |
  | obtain it through the world-wide-web, please send an email             |
- | to serghei@phalconphp.com so I can send you a copy immediately.        |
+ | to license@phalconphp.com so I can send you a copy immediately.        |
  +------------------------------------------------------------------------+
  | Authors: Serghei Iakovlev <serghei@phalconphp.com>                     |
  +------------------------------------------------------------------------+
