@@ -1,7 +1,7 @@
 <?php
 
-use Codeception\TestCase\Test;
 use Codeception\Specify;
+use Codeception\TestCase\Test;
 
 class CreateInstanceTest extends Test
 {

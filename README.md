@@ -232,4 +232,4 @@ Phalcon Breadcrumbs is open-sourced software licensed under the [New BSD License
 
 [:composer:]: https://getcomposer.org/
 [:phalcon:]: https://github.com/phalcon/cphalcon/releases
-[:license:]: https://github.com/phalcongelist/breadcrumbs/blob/master/docs/LICENSE.md
+[:license:]: https://github.com/phalcongelist/breadcrumbs/blob/master/LICENSE.txt

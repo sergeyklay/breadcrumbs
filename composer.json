@@ -1,45 +1,44 @@
 {
-  "name":        "phalcongelist/breadcrumbs",
-  "description": "Powerful and flexible component for building site breadcrumbs in Phalcon 2+.",
-  "keywords":    ["phalcon", "breadcrumbs", "crumbs"],
-  "type":        "library",
-  "license":     "BSD-3-Clause",
-  "homepage":    "https://github.com/phalcongelist/breadcrumbs",
-  "authors": [
-    {
-      "name": "Serghei Iakovlev",
-      "email": "serghei@phalconphp.com",
-      "role": "developer"
+    "name": "phalcongelist/breadcrumbs",
+    "description": "Powerful and flexible component for building site breadcrumbs in Phalcon 2+.",
+    "keywords": [
+        "phalcon",
+        "breadcrumbs",
+        "crumbs"
+    ],
+    "type":        "library",
+    "license":     "BSD-3-Clause",
+    "homepage":    "https://github.com/phalcongelist/breadcrumbs",
+    "authors": [
+        {
+            "name": "Serghei Iakovlev",
+            "email": "serghei@phalconphp.com",
+            "role": "developer"
+        },
+        {
+            "name": "Contributors",
+            "homepage": "https://github.com/phalcongelist/breadcrumbs/graphs/contributors"
+        }
+    ],
+    "support": {
+        "source": "https://github.com/phalcongelist/breadcrumbs",
+        "issues": "https://github.com/phalcongelist/breadcrumbs/issues",
+        "wiki":   "https://github.com/phalcongelist/breadcrumbs/wiki",
+        "forum":  "https://forum.phalconphp.com/"
     },
-    {
-      "name": "Contributors",
-      "homepage": "https://github.com/phalcongelist/breadcrumbs/graphs/contributors"
-    }
-  ],
-  "support": {
-    "source": "https://github.com/phalcongelist/breadcrumbs",
-    "issues": "https://github.com/phalcongelist/breadcrumbs/issues",
-    "wiki":   "https://github.com/phalcongelist/breadcrumbs/wiki",
-    "forum":  "https://forum.phalconphp.com/"
-  },
-  "require": {
-    "php": ">= 5.4",
-    "ext-phalcon": ">=2.0"
-  },
-  "require-dev": {
-    "squizlabs/php_codesniffer": "^2.5",
-    "codeception/codeception": "^2.1",
+    "require": {
+        "php": ">= 5.5",
+        "ext-phalcon": ">=2.0 <4.0"
+    },
+    "require-dev": {
+    "squizlabs/php_codesniffer": "^2.6",
+    "codeception/codeception": "^2.2",
     "codeception/specify": "^0.4",
     "codeception/verify": "^0.3"
-  },
-  "autoload": {
-    "psr-4": {
-      "Phalcon\\": "src/"
+    },
+    "autoload": {
+        "psr-4": {
+            "Phalcon\\": "src/"
+        }
     }
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "1.1.x-dev"
-    }
-  }
 }
