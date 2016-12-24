@@ -66,6 +66,7 @@ before_install:
   - travis_retry composer install --prefer-dist --no-interaction --ignore-platform-reqs &> /dev/null
   - travis_retry composer require --dev "phalcon/zephir:dev-master" --ignore-platform-reqs &> /dev/null
   - ( bash tests/_ci/install_zephir.sh )
+  - ( bash tests/_ci/install_prereqs.sh )
 
 install:
   - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b ${PHALCON_VERSION} &> /dev/null
