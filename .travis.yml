@@ -32,8 +32,8 @@ env:
     - PATH="$PATH:~/bin"
   matrix:
     - PHALCON_VERSION="phalcon-v2.0.13"
-    - PHALCON_VERSION="v3.0.2"
-    - PHALCON_VERSION="v3.0.2" ZEND_BACKEND="--backend=ZendEngine3"
+    - PHALCON_VERSION="v3.0.3"
+    - PHALCON_VERSION="v3.0.3" ZEND_BACKEND="--backend=ZendEngine3"
 
 # multiple php version exclusion matrix
 matrix:
@@ -41,11 +41,11 @@ matrix:
   exclude:
     - env: PHALCON_VERSION="phalcon-v2.0.13"
       php: 7.0
-    - env: PHALCON_VERSION="v3.0.2"
+    - env: PHALCON_VERSION="v3.0.3"
       php: 7.0
-    - env: PHALCON_VERSION="v3.0.2" ZEND_BACKEND="--backend=ZendEngine3"
+    - env: PHALCON_VERSION="v3.0.3" ZEND_BACKEND="--backend=ZendEngine3"
       php: 5.5
-    - env: PHALCON_VERSION="v3.0.2" ZEND_BACKEND="--backend=ZendEngine3"
+    - env: PHALCON_VERSION="v3.0.3" ZEND_BACKEND="--backend=ZendEngine3"
       php: 5.6
 
 cache:
