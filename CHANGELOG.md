@@ -1,3 +1,5 @@
+# [1.3.1](https://github.com/phalcon/breadcrumbs/releases/tag/v1.3.1) (XXXX-XX-XX)
+
 # [1.3.0](https://github.com/phalcon/breadcrumbs/releases/tag/v1.3.0) (2017-04-10)
 * Changed organization
 * Minor `composer.json` improvements
