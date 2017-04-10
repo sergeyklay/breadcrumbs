@@ -1,6 +1,6 @@
-# Phalcon Breadcrumbs [![Build Status](https://travis-ci.org/phalcongelist/breadcrumbs.svg?branch=master)](https://travis-ci.org/phalcongelist/breadcrumbs)
+# Phalcon Breadcrumbs [![Build Status](https://travis-ci.org/phalcon/breadcrumbs.svg?branch=master)](https://travis-ci.org/phalcon/breadcrumbs)
 
-![Breadcrumbs screenshot](https://github.com/phalcongelist/breadcrumbs/blob/master/docs/breadcrumbs.png)
+![Breadcrumbs Screenshot](https://github.com/phalcon/breadcrumbs/blob/master/docs/breadcrumbs.png)
 
 Phalcon Breadcrumbs is a powerful and flexible component for building site breadcrumbs.
 You can adapt it to your own needs or improve it if you want.
@@ -11,7 +11,7 @@ Thanks!
 
 ## NOTE
 
-The master branch will always contain the latest stable version. If you wish
+The `master` branch will always contain the latest stable version. If you wish
 to check older versions or newer ones currently under development, please
 switch to the relevant branch/tag.
 
@@ -27,18 +27,18 @@ To use this component, you need at least:
 
 ### Installing
 
-Install composer in a common location or in your project:
+Install Composer in a common location or in your project:
 
 ```sh
 $ curl -s http://getcomposer.org/installer | php
 ```
 
-Create the composer.json file as follows:
+Create the `composer.json` file as follows:
 
 ```json
 {
     "require": {
-        "phalcongelist/breadcrumbs": "^1.2"
+        "phalcon/breadcrumbs": "^1.3"
     }
 }
 ```
@@ -232,4 +232,4 @@ Phalcon Breadcrumbs is open-sourced software licensed under the [New BSD License
 
 [:composer:]: https://getcomposer.org/
 [:phalcon:]: https://github.com/phalcon/cphalcon/releases
-[:license:]: https://github.com/phalcongelist/breadcrumbs/blob/master/LICENSE.txt
+[:license:]: https://github.com/phalcon/breadcrumbs/blob/master/LICENSE.txt
