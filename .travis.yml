@@ -1,7 +1,7 @@
-#
 #  Phalcon Breadcrumbs
 #
-#  Copyright (c) 2016, Phalcon Team (https://www.phalconphp.com)
+#  Copyright (c) 2016-2017, Phalcon Framework Team
+#  (https://www.phalconphp.com)
 #
 #  This source file is subject to the New BSD License that is bundled
 #  with this package in the file LICENSE.txt
@@ -14,80 +14,60 @@
 
 language: php
 
-sudo: required
 dist: trusty
+sudo: false
 
 php:
-  - 5.5
-  - 5.6
-  - 7.0
+    - 5.5
+    - 5.6
+    - 7.0
+    - 7.1
 
 git:
-  depth: 1
+    depth: 1
 
 env:
-  global:
-    - ZEND_DONT_UNLOAD_MODULES=1
-    - CC="ccache gcc"
-    - PATH="$PATH:~/bin"
-  matrix:
-    - PHALCON_VERSION="phalcon-v2.0.13"
-    - PHALCON_VERSION="v3.0.2"
-    - PHALCON_VERSION="v3.0.2" ZEND_BACKEND="--backend=ZendEngine3"
+    matrix:
+        - PHALCON_VERSION="phalcon-v2.0.13"
+        - PHALCON_VERSION="v3.1.2"
 
-# multiple php version exclusion matrix
 matrix:
-  fast_finish: true
-  exclude:
-    - env: PHALCON_VERSION="phalcon-v2.0.13"
-      php: 7.0
-    - env: PHALCON_VERSION="v3.0.2"
-      php: 7.0
-    - env: PHALCON_VERSION="v3.0.2" ZEND_BACKEND="--backend=ZendEngine3"
-      php: 5.5
-    - env: PHALCON_VERSION="v3.0.2" ZEND_BACKEND="--backend=ZendEngine3"
-      php: 5.6
+    fast_finish: true
+    exclude:
+        - env: PHALCON_VERSION="phalcon-v2.0.13"
+          php: 7.0
+        - env: PHALCON_VERSION="phalcon-v2.0.13"
+          php: 7.1
 
 cache:
-  apt: true
-  ccache: true
-  timeout: 691200
-  directories:
-    - .temp
-    - vendor
-    - $HOME/.ccache
-    - $HOME/.composer/cache
+    apt: true
+    ccache: true
+    timeout: 691200
+    directories:
+        - .temp
+        - vendor
+        - $HOME/.ccache
+        - $HOME/.composer/cache
 
 before_install:
-  - phpenv config-rm xdebug.ini || true
-  - sudo ln -s /home/travis/.phpenv/versions/$(phpenv version-name)/bin/phpize /usr/bin/
-  - sudo ln -s /home/travis/.phpenv/versions/$(phpenv version-name)/bin/php-config /usr/bin/
-  - if [ -n "$GH_TOKEN" ]; then composer config github-oauth.github.com ${GH_TOKEN}; fi;
-  - travis_retry composer install --prefer-dist --no-interaction --ignore-platform-reqs &> /dev/null
-  - travis_retry composer require --dev "phalcon/zephir:dev-master" --ignore-platform-reqs &> /dev/null
-  - ( bash tests/_ci/install_zephir.sh )
+    - phpenv config-rm xdebug.ini || true
+    - if [ -n "$GH_TOKEN" ]; then composer config github-oauth.github.com ${GH_TOKEN}; fi;
+    - travis_retry composer install --prefer-dist --no-interaction --ignore-platform-reqs &> /dev/null
+    - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b ${PHALCON_VERSION} &> /dev/null
 
 install:
-  - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b ${PHALCON_VERSION} &> /dev/null
-  - ln -s ${TRAVIS_BUILD_DIR}/.temp ${TRAVIS_BUILD_DIR}/cphalcon/.temp
-  - ( cd cphalcon; zephir fullclean && zephir generate $ZEND_BACKEND &> /dev/null )
-  - ( cd cphalcon/ext; export CFLAGS="-g3 -O1 -std=gnu90 -Wall -DZEPHIR_RELEASE=1"; /usr/bin/phpize &> /dev/null && ./configure --silent --enable-phalcon &> /dev/null && make --silent -j2 &> /dev/null && make --silent install )
-  - phpenv config-add tests/_ci/phalcon.ini
+    - (cd cphalcon/build; bash install &>/dev/null)
+    - '[[ "${PHALCON_VERSION}" == "phalcon-v2.0.13" ]] || phpenv config-add cphalcon/tests/_ci/phalcon.ini'
+    - '[[ "${PHALCON_VERSION}" != "phalcon-v2.0.13" ]] || phpenv config-add cphalcon/unit-tests/ci/phalcon.ini'
 
 script:
-  - vendor/bin/phpcs
-  - vendor/bin/codecept build &> /dev/null
-  - vendor/bin/codecept run
+    - vendor/bin/phpcs
+    - vendor/bin/codecept build &> /dev/null
+    - vendor/bin/codecept run
 
 notifications:
-  email:
-    recipients:
-      - build@phalconphp.com
-    on_success: change
-    on_failure: always
-
-addons:
-  apt:
-    packages:
-      - gdb
-      - re2c
+    email:
+        recipients:
+            - build@phalconphp.com
+        on_success: change
+        on_failure: always
