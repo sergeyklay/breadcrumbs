@@ -57,7 +57,8 @@ before_install:
 
 install:
     - (cd cphalcon/build; bash install &>/dev/null)
-    - phpenv config-add cphalcon/tests/_ci/phalcon.ini
+    - '[[ "${PHALCON_VERSION}" == "phalcon-v2.0.13" ]] || phpenv config-add cphalcon/tests/_ci/phalcon.ini'
+    - '[[ "${PHALCON_VERSION}" != "phalcon-v2.0.13" ]] || phpenv config-add cphalcon/unit-tests/ci/phalcon.ini'
 
 script:
     - vendor/bin/phpcs
