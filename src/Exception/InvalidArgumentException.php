@@ -4,7 +4,7 @@
  +------------------------------------------------------------------------+
  | Phalcon Breadcrumbs                                                    |
  +------------------------------------------------------------------------+
- | Copyright (c) 2016 Phalcon Framework Team                              |
+ | Copyright (c) 2016-2017 Phalcon Framework Team                         |
  +------------------------------------------------------------------------+
  | This source file is subject to the New BSD License that is bundled     |
  | with this package in the file LICENSE.txt.                             |
