@@ -1,4 +1,5 @@
-# [1.3.1](https://github.com/phalcon/breadcrumbs/releases/tag/v1.3.1) (XXXX-XX-XX)
+# [1.3.1](https://github.com/phalcon/breadcrumbs/releases/tag/v1.3.1) (2017-04-18)
+* Fixed invalid converting `$id` to `":null:"` if `$url` is not null in update function.
 
 # [1.3.0](https://github.com/phalcon/breadcrumbs/releases/tag/v1.3.0) (2017-04-10)
 * Changed organization
