@@ -41,12 +41,9 @@ matrix:
 
 cache:
     apt: true
-    ccache: true
     timeout: 691200
     directories:
-        - .temp
         - vendor
-        - $HOME/.ccache
         - $HOME/.composer/cache
 
 before_install:
