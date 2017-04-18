@@ -512,7 +512,7 @@ class Breadcrumbs extends Component
                 );
             }
 
-            if (!is_null($url)) {
+            if (is_null($url)) {
                 $id = ':null:';
             }
 
