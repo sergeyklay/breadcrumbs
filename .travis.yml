@@ -29,7 +29,7 @@ git:
 env:
     matrix:
         - PHALCON_VERSION="phalcon-v2.0.13"
-        - PHALCON_VERSION="v3.1.2"
+        - PHALCON_VERSION="v3.2.0"
 
 matrix:
     fast_finish: true
@@ -49,11 +49,11 @@ cache:
 before_install:
     - phpenv config-rm xdebug.ini || true
     - if [ -n "$GH_TOKEN" ]; then composer config github-oauth.github.com ${GH_TOKEN}; fi;
-    - travis_retry composer install --prefer-dist --no-interaction --ignore-platform-reqs &> /dev/null
-    - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b ${PHALCON_VERSION} &> /dev/null
+    - travis_retry composer install --prefer-dist --no-interaction --ignore-platform-reqs
+    - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b ${PHALCON_VERSION}
 
 install:
-    - (cd cphalcon/build; bash install &>/dev/null)
+    - (cd cphalcon/build; bash install)
     - '[[ "${PHALCON_VERSION}" == "phalcon-v2.0.13" ]] || phpenv config-add cphalcon/tests/_ci/phalcon.ini'
     - '[[ "${PHALCON_VERSION}" != "phalcon-v2.0.13" ]] || phpenv config-add cphalcon/unit-tests/ci/phalcon.ini'
 
