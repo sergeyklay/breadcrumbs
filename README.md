@@ -25,6 +25,8 @@ To use this component, you need at least:
 * PHP >= 5.5
 * Latest stable [Phalcon Framework release][:phalcon:] extension enabled
 
+**NOTE:** Support for legacy PHP versions (down to 5.6) is provided on a best-effort basis.
+
 ### Installing
 
 Install Composer in a common location or in your project:
