@@ -29,7 +29,7 @@ git:
 env:
     matrix:
         - PHALCON_VERSION="phalcon-v2.0.13"
-        - PHALCON_VERSION="v3.2.0"
+        - PHALCON_VERSION="v3.2.2"
 
 matrix:
     fast_finish: true
@@ -51,11 +51,12 @@ before_install:
     - if [ -n "$GH_TOKEN" ]; then composer config github-oauth.github.com ${GH_TOKEN}; fi;
     - travis_retry composer install --prefer-dist --no-interaction --ignore-platform-reqs
     - git clone -q --depth=1 https://github.com/phalcon/cphalcon.git -b ${PHALCON_VERSION}
+    - export PHP_MAJOR="$(echo $TRAVIS_PHP_VERSION | cut -d '.' -f 1)"
 
 install:
     - (cd cphalcon/build; bash install)
-    - '[[ "${PHALCON_VERSION}" == "phalcon-v2.0.13" ]] || phpenv config-add cphalcon/tests/_ci/phalcon.ini'
-    - '[[ "${PHALCON_VERSION}" != "phalcon-v2.0.13" ]] || phpenv config-add cphalcon/unit-tests/ci/phalcon.ini'
+    - phpenv config-add $TRAVIS_BUILD_DIR/tests/_ci/phalcon.ini
+    - if [[ "$PHP_MAJOR" == 5 ]]; composer require doctrine/instantiator:1.0.5 fi;
 
 script:
     - vendor/bin/phpcs
