@@ -56,7 +56,7 @@ before_install:
 install:
     - (cd cphalcon/build; bash install)
     - phpenv config-add $TRAVIS_BUILD_DIR/tests/_ci/phalcon.ini
-    - if [[ "$PHP_MAJOR" == 5 ]]; composer require doctrine/instantiator:1.0.5 fi;
+    - if [ "$PHP_MAJOR" == 5 ]; then composer require doctrine/instantiator:1.0.5; fi;
 
 script:
     - vendor/bin/phpcs
