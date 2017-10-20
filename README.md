@@ -29,7 +29,13 @@ To use this component, you need at least:
 
 ### Installing
 
-Install Composer in a common location or in your project:
+If you have Composer [globally installed](https://getcomposer.org/doc/00-intro.md#globally), this command will suffice:
+
+```sh
+$ composer require phalcon/breadcrumbs
+```
+
+Otherwise, install Composer in a common location or in your project:
 
 ```sh
 $ curl -s http://getcomposer.org/installer | php
@@ -45,7 +51,7 @@ Create the `composer.json` file as follows:
 }
 ```
 
-Run the composer installer:
+Then run the composer installer:
 
 ```sh
 $ php composer.phar install
