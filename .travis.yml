@@ -29,7 +29,7 @@ git:
 env:
     matrix:
         - PHALCON_VERSION="phalcon-v2.0.13"
-        - PHALCON_VERSION="v3.2.2"
+        - PHALCON_VERSION="v3.2.4"
 
 matrix:
     fast_finish: true
