@@ -27,11 +27,11 @@
         "forum":  "https://forum.phalconphp.com/"
     },
     "require": {
-        "php": ">= 5.5 <7.2",
+        "php": ">= 5.5 <8.0",
         "ext-phalcon": ">=2.0 <4.0"
     },
     "require-dev": {
-        "myclabs/deep-copy": "1.6.1",
+        "myclabs/deep-copy": "1.6.*",
         "phpdocumentor/reflection-docblock": "^2.0",
         "phpunit/phpunit": "^4.8",
         "squizlabs/php_codesniffer": "^2.8",
