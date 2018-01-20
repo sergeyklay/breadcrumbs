@@ -25,7 +25,7 @@ To use this component, you need at least:
 * PHP >= 5.5
 * Latest stable [Phalcon Framework release][:phalcon:] extension enabled
 
-**NOTE:** Support for legacy PHP versions (down to 5.6) is provided on a best-effort basis.
+**NOTE:** Support for legacy PHP versions (down to 7.0) is provided on a best-effort basis.
 
 ### Installing
 
@@ -236,7 +236,7 @@ breadcrumbs:afterSetTemplate
 ## Copyright
 
 Phalcon Breadcrumbs is open-sourced software licensed under the [New BSD License][:license:].
-© Phalcon Framework Team and contributors
+© Phalcon Team and contributors
 
 [:composer:]: https://getcomposer.org/
 [:phalcon:]: https://github.com/phalcon/cphalcon/releases
