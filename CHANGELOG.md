@@ -1,3 +1,17 @@
+# [1.3.4](https://github.com/phalcon/breadcrumbs/releases/tag/v1.3.4) (2018-01-20)
+* Enabled support for PHP 7.2
+* Used latest Phalcon
+* Updated dev dependencies
+
+# [1.3.3](https://github.com/phalcon/breadcrumbs/releases/tag/v1.3.3) (2017-10-21)
+* Used latest Phalcon
+* Updated dev dependencies
+
+# [1.3.2](https://github.com/phalcon/breadcrumbs/releases/tag/v1.3.2) (2017-09-10)
+* Used latest Phalcon
+* Updated tests
+* Updated docs
+
 # [1.3.1](https://github.com/phalcon/breadcrumbs/releases/tag/v1.3.1) (2017-04-18)
 * Fixed invalid converting `$id` to `":null:"` if `$url` is not null in update function.
 
