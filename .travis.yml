@@ -14,20 +14,12 @@ git:
     depth: 1
 
 env:
-    matrix:
+    global:
         - CC="ccache gcc"
-        - PHALCON_VERSION="phalcon-v2.0.13"
         - PHALCON_VERSION="v3.3.1"
 
 matrix:
     fast_finish: true
-    exclude:
-        - env: PHALCON_VERSION="phalcon-v2.0.13"
-          php: 7.0
-        - env: PHALCON_VERSION="phalcon-v2.0.13"
-          php: 7.1
-        - env: PHALCON_VERSION="phalcon-v2.0.13"
-          php: 7.2
 
 cache:
     # See: https://github.com/travis-ci/travis-ci/issues/8714
@@ -60,7 +52,6 @@ script:
     - vendor/bin/codecept build
     - vendor/bin/codecept run
 
-notifications:
 after_failure:
     - for file in `ls ./tests/_output`; do [ -f ./tests/_output/$file ] && cat ./tests/_output/$file; done;
 
