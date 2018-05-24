@@ -74,6 +74,12 @@ class Breadcrumbs extends Component
     protected $implicitFlush = true;
 
     /**
+     * Last element not link
+     * @var bool
+     */
+    protected $lastNotLinked = false;
+
+    /**
      * Breadcrumbs constructor.
      */
     public function __construct()
@@ -261,6 +267,15 @@ class Breadcrumbs extends Component
     }
 
     /**
+     * Sets last elements not link.
+     * @param bool $linked
+     */
+    public function setLastNotLinked($linked)
+    {
+        $this->lastNotLinked = $linked;
+    }
+
+    /**
      * Adds a new crumb.
      *
      * Events:
@@ -382,6 +397,10 @@ class Breadcrumbs extends Component
                 if ($eventsManager) {
                     $eventsManager->fire('breadcrumbs:afterTranslate', $this);
                 }
+            }
+
+            if (true === $this->lastNotLinked && end($this->elements) == $crumb) {
+                $crumb['linked'] = null;
             }
 
             if ($crumb['linked']) {
