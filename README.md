@@ -104,6 +104,12 @@ Volt Engine
 $this->breadcrumbs->setSeparator(' &raquo; ');
 ```
 
+**Make The last element is always not a link:**
+
+```php
+$this->breadcrumbs->setLastNotLinked(true);
+```
+
 **Delete a crumb (by url):**
 
 ```php
