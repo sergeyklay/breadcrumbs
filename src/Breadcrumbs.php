@@ -80,6 +80,12 @@ class Breadcrumbs extends Component
     protected $lastNotLinked = false;
 
     /**
+     * Count null link
+     * @var integer
+     */
+    protected $countNull = 0;
+
+    /**
      * Breadcrumbs constructor.
      */
     public function __construct()
@@ -324,7 +330,8 @@ class Breadcrumbs extends Component
 
             $id = $link;
             if (is_null($id)) {
-                $id = ':null:';
+                $id = ':null'.$this->countNull.':';
+                $this->countNull++;
             }
 
             $this->elements[$id] = [
