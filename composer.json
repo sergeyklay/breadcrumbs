@@ -1,47 +1,49 @@
 {
-    "name": "phalcon/breadcrumbs",
+    "name": "sergeyklay/breadcrumbs",
+    "type": "library",
     "description": "Powerful and flexible component for building site breadcrumbs in Phalcon 2+.",
     "keywords": [
         "phalcon",
         "breadcrumbs",
         "crumbs"
     ],
-    "type":        "library",
-    "license":     "BSD-3-Clause",
-    "homepage":    "https://github.com/phalcon/breadcrumbs",
+    "homepage": "https://github.com/sergeyklay/breadcrumbs",
+    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Phalcon Team",
-            "email": "team@phalconphp.com",
+            "email": "team@phalcon.io",
             "homepage": "https://phalconphp.com/en/team"
         },
         {
             "name": "Contributors",
-            "homepage": "https://github.com/phalcon/breadcrumbs/graphs/contributors"
+            "homepage": "https://github.com/sergeyklay/breadcrumbs/graphs/contributors"
         }
     ],
-    "support": {
-        "source": "https://github.com/phalcon/breadcrumbs",
-        "issues": "https://github.com/phalcon/breadcrumbs/issues",
-        "wiki":   "https://github.com/phalcon/breadcrumbs/wiki",
-        "forum":  "https://forum.phalconphp.com/"
-    },
     "require": {
         "php": ">= 5.5 <8.0",
         "ext-phalcon": ">=2.0 <4.0"
     },
+    "conflict": {
+        "phalcon/breadcrumbs": "*"
+    },
     "require-dev": {
+        "codeception/codeception": "^2.3",
+        "codeception/specify": "^0.4",
+        "codeception/verify": "^0.3",
         "myclabs/deep-copy": "1.6.*",
         "phpdocumentor/reflection-docblock": "^2.0",
         "phpunit/phpunit": "^4.8",
-        "squizlabs/php_codesniffer": "^2.8",
-        "codeception/codeception": "^2.3",
-        "codeception/specify": "^0.4",
-        "codeception/verify": "^0.3"
+        "squizlabs/php_codesniffer": "^2.8"
     },
     "autoload": {
         "psr-4": {
             "Phalcon\\": "src/"
         }
+    },
+    "support": {
+        "issues": "https://github.com/sergeyklay/breadcrumbs/issues",
+        "forum": "https://forum.phalconphp.com/",
+        "source": "https://github.com/phalcon/sergeyklay"
     }
 }
