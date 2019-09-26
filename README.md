@@ -1,6 +1,6 @@
-# Phalcon Breadcrumbs [![Build Status](https://travis-ci.org/phalcon/breadcrumbs.svg?branch=master)](https://travis-ci.org/phalcon/breadcrumbs)
+# Phalcon Breadcrumbs [![Build Status][:travis-badge:]][:travis-url:]
 
-![Breadcrumbs Screenshot](https://github.com/phalcon/breadcrumbs/blob/master/docs/breadcrumbs.png)
+![Breadcrumbs Screenshot][:screenshot:]
 
 Phalcon Breadcrumbs is a powerful and flexible component for building site breadcrumbs.
 You can adapt it to your own needs or improve it if you want.
@@ -23,38 +23,14 @@ To use this component, you need at least:
 
 * [Composer][:composer:]
 * PHP >= 5.5
-* Latest stable [Phalcon Framework release][:phalcon:] extension enabled
+* [Phalcon Framework release][:phalcon:] extension enabled >= 2.x < 4.x
 
 **NOTE:** Support for legacy PHP versions (down to 7.0) is provided on a best-effort basis.
 
 ### Installing
 
-If you have Composer [globally installed](https://getcomposer.org/doc/00-intro.md#globally), this command will suffice:
-
 ```sh
 $ composer require phalcon/breadcrumbs
-```
-
-Otherwise, install Composer in a common location or in your project:
-
-```sh
-$ curl -s http://getcomposer.org/installer | php
-```
-
-Create the `composer.json` file as follows:
-
-```json
-{
-    "require": {
-        "phalcon/breadcrumbs": "^1.3"
-    }
-}
-```
-
-Then run the composer installer:
-
-```sh
-$ php composer.phar install
 ```
 
 ### Define your breadcrumbs
@@ -62,6 +38,8 @@ $ php composer.phar install
 We recommend registering it with your application's services for even easier use:
 
 ```php
+<?php
+
 use Phalcon\Breadcrumbs;
 
 // Initialize the Breadcrumbs component.
@@ -73,19 +51,23 @@ $di->setShared('breadcrumbs', function () {
 **Adding a crumb with a link:**
 
 ```php
+<?php
+
 $this->breadcrumbs->add('Home', '/');
 ```
 
 **Adding a crumb without a link (normally the last one):**
 
 ```php
+<?php
+
 $this->breadcrumbs->add('User', null, ['linked' => false]);
 ```
 
 **Output crumbs:**
 
 Php Engine
-```php
+```html
 <ol class="breadcrumb">
     <?php $this->breadcrumbs->output(); ?>
 </ol>
@@ -101,18 +83,24 @@ Volt Engine
 **Change crumb separator:**
 
 ```php
+<?php
+
 $this->breadcrumbs->setSeparator(' &raquo; ');
 ```
 
 **Make The last element is always not a link:**
 
 ```php
+<?php
+
 $this->breadcrumbs->setLastNotLinked(true);
 ```
 
 **Delete a crumb (by url):**
 
 ```php
+<?php
+
 $this->breadcrumbs->remove('/admin/user/create');
 
 // remove a crumb without an url
@@ -122,17 +110,23 @@ $this->breadcrumbs->remove(null);
 **Update an existing crumb:**
 
 ```php
+<?php
+
 $this->breadcrumbs->update('/admin/user/remove', ['label' => '<strong class="red">Remove</strong>']);
 ```
 
 **Count crumbs:**
 ```php
+<?php
+
 $this->breadcrumbs->count();
 ```
 
 **Sets rendering template:**
 
 ```php
+<?php
+
 $this->breadcrumbs->setTemplate(
     '<li><a href="{{link}}">{{icon}}{{label}}</a></li>', // linked
     '<li class="active">{{icon}}{{label}}</li>',         // not linked
@@ -143,6 +137,8 @@ $this->breadcrumbs->setTemplate(
 **Multi-language support:**
 
 ```php
+<?php
+
 use Phalcon\Translate\Adapter\NativeArray as Translator;
 use Phalcon\Breadcrumbs;
 
@@ -167,11 +163,18 @@ $di->setShared('breadcrumbs', function () {
 **Errors logging:**
 
 ```php
+<?php
+
 use Phalcon\Logger\Formatter\Line as FormatterLine;
 use Phalcon\Logger\Adapter\File as FileLogger;
 use Phalcon\Breadcrumbs;
 
-// Initialize the Logger.
+/**
+ * Initialize the Logger.
+ *
+ * @var $config array
+ * @var $di \Phalcon\Di
+ */
 $di->setShared('logger', function ($filename = null, $format = null) use ($config) {
     $formatter = new FormatterLine($config->get('logger')->format, $config->get('logger')->date);
     $logger = new FileLogger($config->get('logger')->path . $config->get('logger')->filename);
@@ -191,6 +194,8 @@ $di->setShared('breadcrumbs', function () {
 ### Events
 
 ```php
+<?php
+
 use Phalcon\Breadcrumbs;
 use Phalcon\Events\Manager as EventsManager;
 
@@ -242,8 +247,11 @@ breadcrumbs:afterSetTemplate
 ## Copyright
 
 Phalcon Breadcrumbs is open-sourced software licensed under the [New BSD License][:license:].
-© Phalcon Team and contributors
+© Serghei Iakovlev
 
 [:composer:]: https://getcomposer.org/
 [:phalcon:]: https://github.com/phalcon/cphalcon/releases
 [:license:]: https://github.com/phalcon/breadcrumbs/blob/master/LICENSE.txt
+[:screenshot:]: https://github.com/sergeyklay/breadcrumbs/blob/master/docs/breadcrumbs.png
+[:travis-url:]: https://travis-ci.com/sergeyklay/breadcrumbs
+[:travis-badge:]: https://travis-ci.com/sergeyklay/breadcrumbs.svg?branch=master
