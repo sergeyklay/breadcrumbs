@@ -1,3 +1,2 @@
 docs/* linguist-documentation
 
-*.sql linguist-language=SQL

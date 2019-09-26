@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+## [1.4.2] - 2019-09-26
+### Removed
+- Removed not used dev dependencies and empty tests structure
+
 ## [1.4.1] - 2019-09-26
 ### Added
 - Allow adding multiple crumbs without a link [#23](https://github.com/sergeyklay/breadcrumbs/pull/23)
@@ -88,7 +92,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/sergeyklay/breadcrumbs/compare/v1.4.1...HEAD
+[Unreleased]: https://github.com/sergeyklay/breadcrumbs/compare/v1.4.2...HEAD
+[1.4.2]: https://github.com/sergeyklay/breadcrumbs/compare/v1.4.1...v1.4.2
 [1.4.1]: https://github.com/sergeyklay/breadcrumbs/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/sergeyklay/breadcrumbs/compare/v1.3.4...v1.4.0
 [1.3.4]: https://github.com/sergeyklay/breadcrumbs/compare/v1.3.3...v1.3.4

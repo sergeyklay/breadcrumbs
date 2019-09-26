@@ -27,13 +27,6 @@
         "phalcon/breadcrumbs": "*"
     },
     "require-dev": {
-        "codeception/codeception": "^2.3",
-        "codeception/specify": "^0.4",
-        "codeception/verify": "^0.3",
-        "myclabs/deep-copy": "1.6.*",
-        "phpdocumentor/reflection-docblock": "^2.0",
-        "phpunit/phpunit": "^4.8",
-        "squizlabs/php_codesniffer": "^2.8"
     },
     "autoload": {
         "psr-4": {
