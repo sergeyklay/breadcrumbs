@@ -30,7 +30,7 @@ To use this component, you need at least:
 ### Installing
 
 ```sh
-$ composer require phalcon/breadcrumbs
+$ composer require sergeyklay/breadcrumbs
 ```
 
 ### Define your breadcrumbs
@@ -250,8 +250,8 @@ Phalcon Breadcrumbs is open-sourced software licensed under the [New BSD License
 © Serghei Iakovlev
 
 [:composer:]: https://getcomposer.org/
-[:phalcon:]: https://github.com/phalcon/cphalcon/releases
-[:license:]: https://github.com/phalcon/breadcrumbs/blob/master/LICENSE.txt
+[:phalcon:]: https://github.com/sergeyklay/cphalcon/releases
+[:license:]: https://github.com/sergeyklay/breadcrumbs/blob/master/LICENSE.txt
 [:screenshot:]: https://github.com/sergeyklay/breadcrumbs/blob/master/docs/breadcrumbs.png
 [:travis-url:]: https://travis-ci.com/sergeyklay/breadcrumbs
 [:travis-badge:]: https://travis-ci.com/sergeyklay/breadcrumbs.svg?branch=master
