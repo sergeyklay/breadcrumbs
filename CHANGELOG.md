@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+## [1.4.1] - 2019-09-26
+### Added
+- Allow adding multiple crumbs without a link [#23](https://github.com/sergeyklay/breadcrumbs/pull/23)
+
+### Changed
+- Changed ownership
 
 ## [1.4.0] - 2018-05-24
 ### Fixed
@@ -82,14 +88,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/phalcon/breadcrumbs/compare/v1.4.0...HEAD
-[1.4.0]: https://github.com/phalcon/breadcrumbs/compare/v1.3.4...v1.4.0
-[1.3.4]: https://github.com/phalcon/breadcrumbs/compare/v1.3.3...v1.3.4
-[1.3.3]: https://github.com/phalcon/breadcrumbs/compare/v1.3.2...v1.3.3
-[1.3.2]: https://github.com/phalcon/breadcrumbs/compare/v1.3.1...v1.3.2
-[1.3.1]: https://github.com/phalcon/breadcrumbs/compare/v1.3.0...v1.3.1
-[1.3.0]: https://github.com/phalcon/breadcrumbs/compare/v1.2.1...v1.3.0
-[1.2.1]: https://github.com/phalcon/breadcrumbs/compare/v1.2.0...v1.2.1
-[1.2.0]: https://github.com/phalcon/breadcrumbs/compare/v1.1.1...v1.2.0
-[1.1.1]: https://github.com/phalcon/breadcrumbs/compare/v1.1.0...v1.1.1
-[1.1.0]: https://github.com/phalcon/breadcrumbs/compare/v1.0.0...v1.1.0
+[Unreleased]: https://github.com/sergeyklay/breadcrumbs/compare/v1.4.1...HEAD
+[1.4.1]: https://github.com/sergeyklay/breadcrumbs/compare/v1.4.0...v1.4.1
+[1.4.0]: https://github.com/sergeyklay/breadcrumbs/compare/v1.3.4...v1.4.0
+[1.3.4]: https://github.com/sergeyklay/breadcrumbs/compare/v1.3.3...v1.3.4
+[1.3.3]: https://github.com/sergeyklay/breadcrumbs/compare/v1.3.2...v1.3.3
+[1.3.2]: https://github.com/sergeyklay/breadcrumbs/compare/v1.3.1...v1.3.2
+[1.3.1]: https://github.com/sergeyklay/breadcrumbs/compare/v1.3.0...v1.3.1
+[1.3.0]: https://github.com/sergeyklay/breadcrumbs/compare/v1.2.1...v1.3.0
+[1.2.1]: https://github.com/sergeyklay/breadcrumbs/compare/v1.2.0...v1.2.1
+[1.2.0]: https://github.com/sergeyklay/breadcrumbs/compare/v1.1.1...v1.2.0
+[1.1.1]: https://github.com/sergeyklay/breadcrumbs/compare/v1.1.0...v1.1.1
+[1.1.0]: https://github.com/sergeyklay/breadcrumbs/compare/v1.0.0...v1.1.0
