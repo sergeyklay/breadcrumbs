@@ -1,21 +1,13 @@
 <?php
 
-/*
- +------------------------------------------------------------------------+
- | Phalcon Breadcrumbs                                                    |
- +------------------------------------------------------------------------+
- | Copyright (c) 2016-2018 Phalcon Framework Team                         |
- +------------------------------------------------------------------------+
- | This source file is subject to the New BSD License that is bundled     |
- | with this package in the file LICENSE.txt.                             |
- |                                                                        |
- | If you did not receive a copy of the license and are unable to         |
- | obtain it through the world-wide-web, please send an email             |
- | to license@phalconphp.com so I can send you a copy immediately.        |
- +------------------------------------------------------------------------+
- | Authors: Serghei Iakovlev <serghei@phalconphp.com>                     |
- +------------------------------------------------------------------------+
-*/
+/**
+ * This file is part of the Phalcon Breadcrumbs.
+ *
+ * (c) Serghei Iakovlev <serghei@phalcon.io>
+ *
+ * For the full copyright and license information, please view the
+ * LICENSE.txt file that was distributed with this source code.
+ */
 
 namespace Phalcon;
 
