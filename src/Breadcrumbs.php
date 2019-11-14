@@ -38,6 +38,12 @@ class Breadcrumbs extends Injectable
     protected $logger;
 
     /**
+     * Events Manager
+     * @var null|Events\ManagerInterface
+     */
+    protected $eventsManager;
+
+    /**
      * Crumb separator
      * @var string
      */
@@ -93,6 +99,13 @@ class Breadcrumbs extends Injectable
             $translate = $this->getDI()->getShared('translate');
             if ($translate instanceof Translate\AdapterInterface) {
                 $this->translate = $translate;
+            }
+        }
+
+        if ($this->getDI()->has('eventsManager')) {
+            $eventsManager = $this->getDI()->getShared('eventsManager');
+            if ($eventsManager instanceof Events\ManagerInterface) {
+                $this->eventsManager = $eventsManager;
             }
         }
     }
@@ -225,9 +238,8 @@ class Breadcrumbs extends Injectable
      */
     public function setTemplate($linked, $notLinked, $icon)
     {
-        $eventsManager = $this->getDI()->getShared('eventsManager');
-        if ($eventsManager) {
-            $eventsManager->fire('breadcrumbs:beforeSetTemplate', $this, [$linked, $notLinked, $icon]);
+        if ($this->eventsManager) {
+            $this->eventsManager->fire('breadcrumbs:beforeSetTemplate', $this, [$linked, $notLinked, $icon]);
         }
 
         try {
@@ -254,8 +266,8 @@ class Breadcrumbs extends Injectable
                 'icon'       => $icon
             ];
 
-            if ($eventsManager) {
-                $eventsManager->fire('breadcrumbs:afterSetTemplate', $this, [$linked, $notLinked, $icon]);
+            if ($this->eventsManager) {
+                $this->eventsManager->fire('breadcrumbs:afterSetTemplate', $this, [$linked, $notLinked, $icon]);
             }
         } catch (\Exception $e) {
             $this->log($e);
@@ -295,9 +307,8 @@ class Breadcrumbs extends Injectable
      */
     public function add($label, $link = null, array $data = [])
     {
-        $eventsManager = $this->getDI()->getShared('eventsManager');
-        if ($eventsManager) {
-            $eventsManager->fire('breadcrumbs:beforeAdd', $this, [$label, $link, $data]);
+        if ($this->eventsManager) {
+            $this->eventsManager->fire('breadcrumbs:beforeAdd', $this, [$label, $link, $data]);
         }
 
         try {
@@ -335,8 +346,8 @@ class Breadcrumbs extends Injectable
             $this->log($e);
         }
 
-        if ($eventsManager) {
-            $eventsManager->fire('breadcrumbs:afterAdd', $this, [$label, $link, $data]);
+        if ($this->eventsManager) {
+            $this->eventsManager->fire('breadcrumbs:afterAdd', $this, [$label, $link, $data]);
         }
 
         return $this;
@@ -363,16 +374,15 @@ class Breadcrumbs extends Injectable
      */
     public function output()
     {
-        $eventsManager = $this->getDI()->getShared('eventsManager');
-        if ($eventsManager) {
-            $eventsManager->fire('breadcrumbs:beforeOutput', $this);
+        if ($this->eventsManager) {
+            $this->eventsManager->fire('breadcrumbs:beforeOutput', $this);
         }
 
         if (empty($this->elements)) {
             if (true === $this->implicitFlush) {
                 echo '';
-                if ($eventsManager) {
-                    $eventsManager->fire('breadcrumbs:afterOutput', $this);
+                if ($this->eventsManager) {
+                    $this->eventsManager->fire('breadcrumbs:afterOutput', $this);
                 }
             } else {
                 return '';
@@ -387,14 +397,14 @@ class Breadcrumbs extends Injectable
             $i++;
             $label = $crumb['label'];
             if ($this->translate) {
-                if ($eventsManager) {
-                    $eventsManager->fire('breadcrumbs:beforeTranslate', $this);
+                if ($this->eventsManager) {
+                    $this->eventsManager->fire('breadcrumbs:beforeTranslate', $this);
                 }
 
                 $label = $this->translate->query($label);
 
-                if ($eventsManager) {
-                    $eventsManager->fire('breadcrumbs:afterTranslate', $this);
+                if ($this->eventsManager) {
+                    $this->eventsManager->fire('breadcrumbs:afterTranslate', $this);
                 }
             }
 
@@ -431,8 +441,8 @@ class Breadcrumbs extends Injectable
         // We return the breadcrumbs as string if the implicitFlush is turned off
         if (false === $this->implicitFlush) {
             return $content;
-        } elseif ($eventsManager) {
-            $eventsManager->fire('breadcrumbs:afterOutput', $this);
+        } elseif ($this->eventsManager) {
+            $this->eventsManager->fire('breadcrumbs:afterOutput', $this);
         }
     }
 
@@ -465,9 +475,8 @@ class Breadcrumbs extends Injectable
      */
     public function remove($link)
     {
-        $eventsManager = $this->getDI()->getShared('eventsManager');
-        if ($eventsManager) {
-            $eventsManager->fire('breadcrumbs:beforeRemove', $this, [$link]);
+        if ($this->eventsManager) {
+            $this->eventsManager->fire('breadcrumbs:beforeRemove', $this, [$link]);
         }
 
         try {
@@ -493,8 +502,8 @@ class Breadcrumbs extends Injectable
             $this->log($e);
         }
 
-        if ($eventsManager) {
-            $eventsManager->fire('breadcrumbs:afterRemove', $this, [$link]);
+        if ($this->eventsManager) {
+            $this->eventsManager->fire('breadcrumbs:afterRemove', $this, [$link]);
         }
 
         return $this;
@@ -559,9 +568,8 @@ class Breadcrumbs extends Injectable
      */
     protected function log(\Exception $e)
     {
-        $eventsManager = $this->getDI()->getShared('eventsManager');
-        if ($eventsManager) {
-            $eventsManager->fire('breadcrumbs:beforeLogging', $this, [$e]);
+        if ($this->eventsManager) {
+            $this->eventsManager->fire('breadcrumbs:beforeLogging', $this, [$e]);
         }
 
         if ($this->logger) {
@@ -570,8 +578,8 @@ class Breadcrumbs extends Injectable
             error_log($e->getMessage());
         }
 
-        if ($eventsManager) {
-            $eventsManager->fire('breadcrumbs:afterLogging', $this, [$e]);
+        if ($this->eventsManager) {
+            $this->eventsManager->fire('breadcrumbs:afterLogging', $this, [$e]);
         }
     }
 
