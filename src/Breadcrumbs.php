@@ -11,7 +11,7 @@
 
 namespace Phalcon;
 
-use Phalcon\Mvc\User\Component;
+use Phalcon\Di\Injectable;
 use Phalcon\Breadcrumbs\Exception\InvalidArgumentException;
 use Phalcon\Breadcrumbs\Exception\OutOfBoundsException;
 use Phalcon\Breadcrumbs\Exception\UnderflowException;
@@ -23,7 +23,7 @@ use Phalcon\Breadcrumbs\Exception\UnderflowException;
  *
  * @package Phalcon
  */
-class Breadcrumbs extends Component
+class Breadcrumbs extends Injectable
 {
     /**
      * Keeps all the breadcrumbs
@@ -225,7 +225,7 @@ class Breadcrumbs extends Component
      */
     public function setTemplate($linked, $notLinked, $icon)
     {
-        $eventsManager = $this->getEventsManager();
+        $eventsManager = $this->getDI()->getShared('eventsManager');
         if ($eventsManager) {
             $eventsManager->fire('breadcrumbs:beforeSetTemplate', $this, [$linked, $notLinked, $icon]);
         }
@@ -295,7 +295,7 @@ class Breadcrumbs extends Component
      */
     public function add($label, $link = null, array $data = [])
     {
-        $eventsManager = $this->getEventsManager();
+        $eventsManager = $this->getDI()->getShared('eventsManager');
         if ($eventsManager) {
             $eventsManager->fire('breadcrumbs:beforeAdd', $this, [$label, $link, $data]);
         }
@@ -363,7 +363,7 @@ class Breadcrumbs extends Component
      */
     public function output()
     {
-        $eventsManager = $this->getEventsManager();
+        $eventsManager = $this->getDI()->getShared('eventsManager');
         if ($eventsManager) {
             $eventsManager->fire('breadcrumbs:beforeOutput', $this);
         }
@@ -465,7 +465,7 @@ class Breadcrumbs extends Component
      */
     public function remove($link)
     {
-        $eventsManager = $this->getEventsManager();
+        $eventsManager = $this->getDI()->getShared('eventsManager');
         if ($eventsManager) {
             $eventsManager->fire('breadcrumbs:beforeRemove', $this, [$link]);
         }
@@ -559,7 +559,7 @@ class Breadcrumbs extends Component
      */
     protected function log(\Exception $e)
     {
-        $eventsManager = $this->getEventsManager();
+        $eventsManager = $this->getDI()->getShared('eventsManager');
         if ($eventsManager) {
             $eventsManager->fire('breadcrumbs:beforeLogging', $this, [$e]);
         }
