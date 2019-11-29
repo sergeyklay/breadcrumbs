@@ -23,7 +23,7 @@ To use this component, you need at least:
 
 * [Composer][:composer:]
 * PHP >= 5.5
-* [Phalcon Framework release][:phalcon:] extension enabled >= 2.x < 4.x
+* [Phalcon Framework][:phalcon:] 2.x, 3.x or 4.x
 
 **NOTE:** Support for legacy PHP versions (down to 7.0) is provided on a best-effort basis.
 

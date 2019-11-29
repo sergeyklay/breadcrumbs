@@ -11,10 +11,15 @@
 
 namespace Phalcon;
 
-use Phalcon\Di\Injectable;
 use Phalcon\Breadcrumbs\Exception\InvalidArgumentException;
 use Phalcon\Breadcrumbs\Exception\OutOfBoundsException;
 use Phalcon\Breadcrumbs\Exception\UnderflowException;
+use Phalcon\Di\Injectable;
+use Phalcon\Events\ManagerInterface as EventsManagerInterface;
+use Phalcon\Logger\AdapterInterface as LegacyLoggerInterface;
+use Phalcon\Translate\Adapter\AdapterInterface as TranslateInterface;
+use Phalcon\Translate\AdapterInterface as LegacyTranslateInterface;
+use Psr\Log\LoggerInterface as PsrLoggerInterface;
 
 /**
  * \Phalcon\Breadcrumbs
@@ -33,13 +38,13 @@ class Breadcrumbs extends Injectable
 
     /**
      * Internal logger
-     * @var null|Logger\AdapterInterface
+     * @var null|LegacyLoggerInterface|PsrLoggerInterface
      */
     protected $logger;
 
     /**
      * Events Manager
-     * @var null|Events\ManagerInterface
+     * @var null|EventsManagerInterface
      */
     protected $eventsManager;
 
@@ -61,7 +66,7 @@ class Breadcrumbs extends Injectable
 
     /**
      * Internal translate adapter
-     * @var null|Translate\AdapterInterface
+     * @var null|TranslateInterface|LegacyTranslateInterface
      */
     protected $translate;
 
@@ -90,21 +95,21 @@ class Breadcrumbs extends Injectable
     {
         if ($this->getDI()->has('logger')) {
             $logger = $this->getDI()->getShared('logger');
-            if ($logger instanceof Logger\AdapterInterface) {
+            if ($logger instanceof LegacyLoggerInterface || $logger instanceof PsrLoggerInterface) {
                 $this->logger = $logger;
             }
         }
 
         if ($this->getDI()->has('translate')) {
             $translate = $this->getDI()->getShared('translate');
-            if ($translate instanceof Translate\AdapterInterface) {
+            if ($translate instanceof TranslateInterface || $translate instanceof LegacyTranslateInterface) {
                 $this->translate = $translate;
             }
         }
 
         if ($this->getDI()->has('eventsManager')) {
             $eventsManager = $this->getDI()->getShared('eventsManager');
-            if ($eventsManager instanceof Events\ManagerInterface) {
+            if ($eventsManager instanceof EventsManagerInterface) {
                 $this->eventsManager = $eventsManager;
             }
         }
@@ -113,7 +118,7 @@ class Breadcrumbs extends Injectable
     /**
      * Gets internal translate adapter.
      *
-     * @return null|Translate\AdapterInterface
+     * @return null|TranslateInterface|LegacyTranslateInterface
      */
     public function getTranslateAdapter()
     {
@@ -123,20 +128,33 @@ class Breadcrumbs extends Injectable
     /**
      * Sets internal translate adapter.
      *
-     * @param Translate\AdapterInterface $translate Translate adapter
+     * @param LegacyTranslateInterface|TranslateInterface $translate Translate adapter
      * @return $this
      */
-    public function setTranslateAdapter(Translate\AdapterInterface $translate)
+    public function setTranslateAdapter($translate)
     {
-        $this->translate = $translate;
+        if (is_object($translate)) {
+            if ($translate instanceof TranslateInterface || $translate instanceof LegacyTranslateInterface) {
+                $this->translate = $translate;
+            }
 
-        return $this;
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            sprintf(
+                'Invalid translate instance. Expected %s or %s, got %s',
+                LegacyTranslateInterface::class,
+                TranslateInterface::class,
+                is_object($translate) ? get_class($translate) : gettype($translate)
+            )
+        );
     }
 
     /**
      * Gets internal logger.
      *
-     * @return null|Logger\AdapterInterface
+     * @return null|LegacyLoggerInterface|PsrLoggerInterface
      */
     public function getLogger()
     {
@@ -146,11 +164,27 @@ class Breadcrumbs extends Injectable
     /**
      * Sets internal logger.
      *
-     * @param Logger\AdapterInterface $logger
+     * @param LegacyLoggerInterface|PsrLoggerInterface $logger
+     * @return $this
      */
-    public function setLogger(Logger\AdapterInterface $logger)
+    public function setLogger($logger)
     {
-        $this->logger = $logger;
+        if (is_object($logger)) {
+            if ($logger instanceof LegacyLoggerInterface || $logger instanceof PsrLoggerInterface) {
+                $this->logger = $logger;
+            }
+
+            return $this;
+        }
+
+        throw new InvalidArgumentException(
+            sprintf(
+                'Invalid logger instance. Expected %s or %s, got %s',
+                LegacyLoggerInterface::class,
+                PsrLoggerInterface::class,
+                is_object($logger) ? get_class($logger) : gettype($logger)
+            )
+        );
     }
 
     /**
@@ -312,7 +346,7 @@ class Breadcrumbs extends Injectable
         }
 
         try {
-            if (!is_string($link) && !is_null($link)) {
+            if (!is_string($link) && $link !== null) {
                 $type = gettype($link);
                 throw new InvalidArgumentException(
                     "Expected value of the second argument to be either string or null type, {$type} given."
@@ -332,7 +366,7 @@ class Breadcrumbs extends Injectable
             }
 
             $id = $link;
-            if (is_null($id)) {
+            if ($id === null) {
                 $id = ':null'.$this->countNull.':';
                 $this->countNull++;
             }
@@ -408,7 +442,7 @@ class Breadcrumbs extends Injectable
                 }
             }
 
-            if (true === $this->lastNotLinked && end($this->elements) == $crumb) {
+            if (true === $this->lastNotLinked && end($this->elements) === $crumb) {
                 $crumb['linked'] = null;
             }
 
@@ -422,7 +456,7 @@ class Breadcrumbs extends Injectable
                 $htmlCrumb = str_replace('{{label}}', $label, $this->template['not-linked']);
             }
 
-            if (1 == $i) {
+            if (1 === $i) {
                 $htmlCrumb = str_replace('{{icon}}', $this->template['icon'], $htmlCrumb);
             } else {
                 $htmlCrumb = str_replace('{{icon}}', '', $htmlCrumb);
@@ -441,7 +475,9 @@ class Breadcrumbs extends Injectable
         // We return the breadcrumbs as string if the implicitFlush is turned off
         if (false === $this->implicitFlush) {
             return $content;
-        } elseif ($this->eventsManager) {
+        }
+
+        if ($this->eventsManager) {
             $this->eventsManager->fire('breadcrumbs:afterOutput', $this);
         }
     }
@@ -484,14 +520,14 @@ class Breadcrumbs extends Injectable
                 throw new UnderflowException('Cannot remove crumb from an empty list.');
             }
 
-            if (!is_string($link) && !is_null($link)) {
+            if (!is_string($link) && $link !== null) {
                 $type = gettype($link);
                 throw new InvalidArgumentException(
                     "Expected value of the first argument to be either string or null type, {$type} given."
                 );
             }
 
-            if (is_null($link)) {
+            if ($link === null) {
                 $link = ':null:';
             }
 
@@ -532,20 +568,20 @@ class Breadcrumbs extends Injectable
                 throw new UnderflowException('Cannot update on an empty breadcrumbs list.');
             }
 
-            if (!is_string($id) && !is_null($id)) {
+            if (!is_string($id) && $id !== null) {
                 $type = gettype($id);
                 throw new InvalidArgumentException(
                     "Expected value of the second argument to be either string or null type, {$type} given."
                 );
             }
 
-            if (is_null($url)) {
+            if ($url === null) {
                 $id = ':null:';
             }
 
             if (!array_key_exists($id, $this->elements)) {
                 throw new OutOfBoundsException(
-                    sprintf("No such url '%s' in breadcrumbs list", is_null($url) ? 'null' : $id)
+                    sprintf("No such url '%s' in breadcrumbs list", $url === null ? 'null' : $id)
                 );
             }
 

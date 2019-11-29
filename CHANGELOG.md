@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+- Initial support of Phalcon 4.x
+
 ## [1.4.2] - 2019-09-26
 ### Removed
 - Removed not used dev dependencies and empty tests structure
