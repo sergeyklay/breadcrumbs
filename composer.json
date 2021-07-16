@@ -1,7 +1,7 @@
 {
-    "name": "sergeyklay/breadcrumbs",
+    "name": "Nialld/breadcrumbs",
     "type": "library",
-    "description": "Powerful and flexible component for building site breadcrumbs in Phalcon 2+.",
+    "description": "Powerful and flexible component for building site breadcrumbs in Phalcon 5.",
     "keywords": [
         "phalcon",
         "breadcrumbs",
@@ -20,8 +20,8 @@
         }
     ],
     "require": {
-        "php": ">= 5.5 <8.0",
-        "ext-phalcon": ">=2.0 <4.0"
+        "php": "^8.0",
+        "ext-phalcon": "^5.0"
     },
     "conflict": {
         "phalcon/breadcrumbs": "*"
@@ -32,10 +32,5 @@
         "psr-4": {
             "Phalcon\\": "src/"
         }
-    },
-    "support": {
-        "issues": "https://github.com/sergeyklay/breadcrumbs/issues",
-        "forum": "https://forum.phalcon.io/",
-        "source": "https://github.com/phalcon/sergeyklay"
     }
 }
